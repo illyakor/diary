@@ -20,10 +20,10 @@ namespace TRPO
         {
             InitializeComponent();
             StreamReader openFile = new StreamReader("Profiles.txt");
-            string bufDataRowfile;
-            while ((bufDataRowfile = openFile.ReadLine()) != null)
+            //string bufDataRowfile;
+            while (/*(bufDataRowfile = */openFile.ReadLine()/*)*/ != null)
             {
-                string[] dataRow = bufDataRowfile.Split(new[] { '|' });
+                string[] dataRow = Convert.ToString(openFile)/*bufDataRowfile*/.Split(new[] { '|' });
                 try
                 {
                     int k;
@@ -40,7 +40,10 @@ namespace TRPO
         private void ButtonInput_Click(object sender, EventArgs e)
         {
             bool booleForOpenFormMenu = false;
-            if (Convert.ToString(textBoxLogin.Text) == "" || Convert.ToString(textBoxPassword.Text) == "") MessageBox.Show("Ошибка. Введите данные!");
+            if (textBoxLogin.Text == "" || textBoxPassword.Text == "")
+            {
+                MessageBox.Show("Ошибка. Введите данные!");
+            }
             else
             {
                 for (i = 0; i < 10; i++)
@@ -59,7 +62,11 @@ namespace TRPO
                             else continue;
                         }
                     }
-                    if (Convert.ToString(textBoxLogin.Text) == profiles[i, 3] && Convert.ToString(textBoxPassword.Text) == password) { count = i; booleForOpenFormMenu = true; break; }
+                    if (textBoxLogin.Text == profiles[i, 3] && textBoxPassword.Text == password)
+                    {
+                        count = i; booleForOpenFormMenu = true;
+                        break;
+                    }
                     else continue;
                 }
 
@@ -80,20 +87,28 @@ namespace TRPO
         }
         private void ButtonPassword_Click(object sender, EventArgs e)
         {
-            if (Convert.ToString(textBoxLogin.Text) == "") MessageBox.Show("Ошибка. Введите логин!");
+            if (textBoxLogin.Text == "")
+            {
+                MessageBox.Show("Ошибка. Введите логин!");
+            }
             else
             {
                 for (i = 0; i < 10; i++)
                 {
-                    if (Convert.ToString(textBoxLogin.Text) == profiles[i, 3]) { MessageBox.Show("Ваш пароль: " + profiles[i, 4] + "!"); break; }
-                    else continue;
+                    if (textBoxLogin.Text == profiles[i, 3])
+                    {
+                        MessageBox.Show("Ваш пароль: " + profiles[i, 4] + "!");
+                        break;
+                    }
                 }
             }
         }
         private void ButtonRegistration_Click(object sender, EventArgs e)
         {
-            if (Convert.ToString(textBoxName.Text) == "" || Convert.ToString(textBoxSurname.Text) == "")
+            if (textBoxName.Text == "" || textBoxSurname.Text == "")
+            {
                 MessageBox.Show("Ошибка. Введите данные!");
+            }
             else
             {
                 string bufTextBoxName = "", bufTextBoxSurname = "";
@@ -133,7 +148,7 @@ namespace TRPO
 
         private void ButtonInput_MouseLeave(object sender, EventArgs e)
         {
-            (sender as Control).BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            (sender as Control).BackColor = System.Drawing.Color.FromArgb(0, 192, 0);
         }
     }
 }
