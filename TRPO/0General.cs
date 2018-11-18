@@ -6,119 +6,83 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Runtime.Serialization.Formatters.Binary;
+using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Forms;
 using System.Numerics;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
 
 namespace TRPO
 {
     public partial class General : Form
-    {
-        string[,] profiles = new string[10, 6];
-        int count = 0, i = 0;
+    { 
+        Dictionary<string, string> users;
         public General()
         {
             InitializeComponent();
-            StreamReader openFile = new StreamReader("Profiles.txt");
-            //string bufDataRowfile;
-            while (/*(bufDataRowfile = */openFile.ReadLine()/*)*/ != null)
-            {
-                string[] dataRow = Convert.ToString(openFile)/*bufDataRowfile*/.Split(new[] { '|' });
-                try
-                {
-                    int k;
-                    for (k = 0; k < 6; k++) profiles[i, k] = dataRow[k];
-                    i++;
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show(@"Ошибка в данных файла!");
-                }
-            }
-            openFile.Close();
         }
         private void ButtonInput_Click(object sender, EventArgs e)
         {
-            bool booleForOpenFormMenu = false;
-            if (textBoxLogin.Text == "" || textBoxPassword.Text == "")
+            ReadFile();
+            ChekUser();
+        }
+        private void ButtonRegistration_Click(object sender, EventArgs e)
+        {
+            OpenRegistrationForm();
+        }
+        private void ButtonPassword_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Эта функция не реализована");
+        }
+        private void ReadFile()
+        {
+            DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(Dictionary<string, string>));
+            using (FileStream fs = new FileStream("people.json", FileMode.OpenOrCreate))
             {
-                MessageBox.Show("Ошибка. Введите данные!");
-            }
-            else
-            {
-                for (i = 0; i < 10; i++)
+                //users = (Dictionary<string, string>)jsonFormatter.ReadObject(fs);
+                try
                 {
-                    string character = "abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ", password = "";
-                    string[] bufData = profiles[i, 4].Split(new[] { 'o' });
-                    int D = Convert.ToInt32(bufData[bufData.Length - 2]), N = Convert.ToInt32(bufData[bufData.Length - 1]), h, t;
-                    BigInteger[] decrypted;
-                    decrypted = new BigInteger[bufData.Length - 2];
-                    for (int kkk = 0; kkk < bufData.Length - 2; kkk++) decrypted[kkk] = BigInteger.Pow(Convert.ToInt32(bufData[kkk]), D) % N;
-                    for (t = 0; t < bufData.Length - 2; t++)
-                    {
-                        for (h = 0; h < 62; h++)
-                        {
-                            if (decrypted[t] == h) password = password + character[h];
-                            else continue;
-                        }
-                    }
-                    if (textBoxLogin.Text == profiles[i, 3] && textBoxPassword.Text == password)
-                    {
-                        count = i; booleForOpenFormMenu = true;
-                        break;
-                    }
-                    else continue;
+                    users = (Dictionary<string, string>)jsonFormatter.ReadObject(fs);
                 }
-
+                catch
+                {
+                    //users = null;
+                }
             }
-            if (booleForOpenFormMenu == true) this.OpenMenuForm();
+        }
+        private void ChekUser()
+        {
+            if (users != null && users.ContainsKey(textBoxLogin.Text))
+            {
+                string password;
+                if ((password = users[textBoxLogin.Text]) == textBoxPassword.Text)
+                {
+                    OpenMenuForm();
+                }
+                else
+                {
+                    MessageBox.Show("Неверный введён пароль!");
+                }
+            }
             else
             {
-                textBoxLogin.Text = ""; textBoxPassword.Text = "";
-                MessageBox.Show("Ошибка. Такого пользователя не существует. Проверьте логин и/или пароль!");
+                MessageBox.Show("Такого пользователя не существует!");
             }
-            i = 0; count = 0;
         }
         private void OpenMenuForm()
         {
             this.Hide();
-            Menu menuForm = new Menu(count, profiles);
+            Menu menuForm = new Menu(textBoxLogin.Text);
             menuForm.Show();
         }
-        private void ButtonPassword_Click(object sender, EventArgs e)
+        private void OpenRegistrationForm()
         {
-            if (textBoxLogin.Text == "")
-            {
-                MessageBox.Show("Ошибка. Введите логин!");
-            }
-            else
-            {
-                for (i = 0; i < 10; i++)
-                {
-                    if (textBoxLogin.Text == profiles[i, 3])
-                    {
-                        MessageBox.Show("Ваш пароль: " + profiles[i, 4] + "!");
-                        break;
-                    }
-                }
-            }
-        }
-        private void ButtonRegistration_Click(object sender, EventArgs e)
-        {
-            if (textBoxName.Text == "" || textBoxSurname.Text == "")
-            {
-                MessageBox.Show("Ошибка. Введите данные!");
-            }
-            else
-            {
-                string bufTextBoxName = "", bufTextBoxSurname = "";
-                DateTimePicker bufDateTimePickerBirthdate = new DateTimePicker();
-                bufTextBoxName = textBoxName.Text; bufTextBoxSurname = textBoxSurname.Text; bufDateTimePickerBirthdate.Value = dateTimePickerBirthdate.Value;
-                this.Hide();
-                Registration registrationForm = new Registration(bufTextBoxName, bufTextBoxSurname, bufDateTimePickerBirthdate);
-                registrationForm.Show();
-            }
+            DateTimePicker bufDateTimePickerBirthdate = new DateTimePicker();
+            bufDateTimePickerBirthdate.Value = dateTimePickerBirthdate.Value;
+            this.Hide();
+            Registration regForm = new Registration(textBoxName.Text, textBoxSurname.Text, bufDateTimePickerBirthdate);
+            regForm.Show();
         }
         private void General_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -153,3 +117,10 @@ namespace TRPO
         }
     }
 }
+/*
+            DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(Dictionary<string, string>));
+            using (FileStream fs = new FileStream("people.json", FileMode.OpenOrCreate))
+            {
+                jsonFormatter.WriteObject(fs, persons);
+            }
+*/

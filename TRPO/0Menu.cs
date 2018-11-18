@@ -19,11 +19,11 @@ namespace TRPO
         string[,] profiles = new string[10, 6];
         string[,] additionalInf = new string[10, 29];
         int count = 0, k = 0, i = 0, j = 0;
-        public Menu(int counter, string[,] bufDataArray)
+        public Menu(string Login)
         {
             InitializeComponent();
-            count = counter;
-            profiles = bufDataArray;
+            //count = counter;
+            //profiles = bufDataArray;
             string bufDataRow = "";
             int rowCount = 0;
             StreamReader fileForReader = new StreamReader("Schedule.txt");
