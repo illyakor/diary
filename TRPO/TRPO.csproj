@@ -99,11 +99,11 @@
     <Compile Include="ShoolProfInf.Designer.cs">
       <DependentUpon>ShoolProfInf.cs</DependentUpon>
     </Compile>
-    <Compile Include="0General.cs">
+    <Compile Include="General.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="0General.Designer.cs">
-      <DependentUpon>0General.cs</DependentUpon>
+    <Compile Include="General.Designer.cs">
+      <DependentUpon>General.cs</DependentUpon>
     </Compile>
     <Compile Include="0Registration.cs">
       <SubType>Form</SubType>
@@ -134,8 +134,8 @@
     <EmbeddedResource Include="ShoolProfInf.resx">
       <DependentUpon>ShoolProfInf.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="0General.resx">
-      <DependentUpon>0General.cs</DependentUpon>
+    <EmbeddedResource Include="General.resx">
+      <DependentUpon>General.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="0Registration.resx">
       <DependentUpon>0Registration.cs</DependentUpon>

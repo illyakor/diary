@@ -38,7 +38,7 @@
             this.nameTextBox = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonReg = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.middleTextBox = new System.Windows.Forms.TextBox();
@@ -149,21 +149,21 @@
             this.label7.TabIndex = 4;
             this.label7.Text = "Ваша фамилия";
             // 
-            // button1
+            // buttonReg
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(6, 177);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(483, 54);
-            this.button1.TabIndex = 12;
-            this.button1.Text = "Зарегистрироваться";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
-            this.button1.MouseEnter += new System.EventHandler(this.Button1_MouseEnter);
-            this.button1.MouseLeave += new System.EventHandler(this.Button1_MouseLeave);
+            this.buttonReg.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.buttonReg.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonReg.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonReg.ForeColor = System.Drawing.Color.White;
+            this.buttonReg.Location = new System.Drawing.Point(6, 177);
+            this.buttonReg.Name = "buttonReg";
+            this.buttonReg.Size = new System.Drawing.Size(483, 54);
+            this.buttonReg.TabIndex = 12;
+            this.buttonReg.Text = "Зарегистрироваться";
+            this.buttonReg.UseVisualStyleBackColor = false;
+            this.buttonReg.Click += new System.EventHandler(this.ButtonRegistration);
+            this.buttonReg.MouseEnter += new System.EventHandler(this.Button1_MouseEnter);
+            this.buttonReg.MouseLeave += new System.EventHandler(this.Button1_MouseLeave);
             // 
             // label11
             // 
@@ -274,7 +274,7 @@
             this.panel3.Controls.Add(this.middleTextBox);
             this.panel3.Controls.Add(this.label6);
             this.panel3.Controls.Add(this.label11);
-            this.panel3.Controls.Add(this.button1);
+            this.panel3.Controls.Add(this.buttonReg);
             this.panel3.Controls.Add(this.label7);
             this.panel3.Controls.Add(this.label8);
             this.panel3.Controls.Add(this.nameTextBox);
@@ -318,7 +318,7 @@
         private System.Windows.Forms.TextBox nameTextBox;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonReg;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox middleTextBox;

@@ -16,40 +16,45 @@ namespace TRPO
 {
     public partial class General : Form
     { 
-        Dictionary<string, string> users;
+        public Dictionary<string, string> users;
         public General()
         {
             InitializeComponent();
+            ReadFile();
         }
+        //public object users;
         private void ButtonInput_Click(object sender, EventArgs e)
         {
-            ReadFile();
+            ReadFile(/*users*/);
             ChekUser();
         }
         private void ButtonRegistration_Click(object sender, EventArgs e)
         {
+            //ReadFile();
             OpenRegistrationForm();
         }
         private void ButtonPassword_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Эта функция не реализована");
         }
-        private void ReadFile()
+        public void ReadFile(/*Dictionary<string, string> newUsers*/)
         {
             DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(Dictionary<string, string>));
             using (FileStream fs = new FileStream("people.json", FileMode.OpenOrCreate))
             {
-                //users = (Dictionary<string, string>)jsonFormatter.ReadObject(fs);
                 try
                 {
                     users = (Dictionary<string, string>)jsonFormatter.ReadObject(fs);
+                    //newUsers = users;
                 }
                 catch
                 {
+                    //newUsers = null;
                     //users = null;
                 }
-            }
+            } 
         }
+        public Dictionary<string, string> GetUser => users;
         private void ChekUser()
         {
             if (users != null && users.ContainsKey(textBoxLogin.Text))
@@ -77,10 +82,8 @@ namespace TRPO
         }
         private void OpenRegistrationForm()
         {
-            DateTimePicker bufDateTimePickerBirthdate = new DateTimePicker();
-            bufDateTimePickerBirthdate.Value = dateTimePickerBirthdate.Value;
             this.Hide();
-            Registration regForm = new Registration(textBoxName.Text, textBoxSurname.Text, bufDateTimePickerBirthdate);
+            Registration regForm = new Registration(textBoxName.Text, textBoxSurname.Text, dateTimePickerBirthdate.Value);
             regForm.Show();
         }
         private void General_FormClosing(object sender, FormClosingEventArgs e)
@@ -116,10 +119,3 @@ namespace TRPO
         }
     }
 }
-/*
-            DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(Dictionary<string, string>));
-            using (FileStream fs = new FileStream("people.json", FileMode.OpenOrCreate))
-            {
-                jsonFormatter.WriteObject(fs, persons);
-            }
-*/
