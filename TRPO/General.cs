@@ -16,47 +16,25 @@ namespace TRPO
 {
     public partial class General : Form
     { 
-        public Dictionary<string, string> users;
         public General()
         {
             InitializeComponent();
-            ReadFile();
         }
-        //public object users;
         private void ButtonInput_Click(object sender, EventArgs e)
         {
-            ReadFile(/*users*/);
             ChekUser();
         }
         private void ButtonRegistration_Click(object sender, EventArgs e)
         {
-            //ReadFile();
             OpenRegistrationForm();
         }
         private void ButtonPassword_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Эта функция не реализована");
         }
-        public void ReadFile(/*Dictionary<string, string> newUsers*/)
-        {
-            DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(Dictionary<string, string>));
-            using (FileStream fs = new FileStream("people.json", FileMode.OpenOrCreate))
-            {
-                try
-                {
-                    users = (Dictionary<string, string>)jsonFormatter.ReadObject(fs);
-                    //newUsers = users;
-                }
-                catch
-                {
-                    //newUsers = null;
-                    //users = null;
-                }
-            } 
-        }
-        public Dictionary<string, string> GetUser => users;
         private void ChekUser()
         {
+            Dictionary<string, string> users = DataRepository.ReadFileUser();
             if (users != null && users.ContainsKey(textBoxLogin.Text))
             {
                 string password;

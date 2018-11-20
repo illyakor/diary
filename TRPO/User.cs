@@ -15,8 +15,11 @@ namespace TRPO
     {
         [DataMember]
         public string Name { get; set; }
+        [DataMember]
         public string LastName { get; set; }
+        [DataMember]
         public string Patronymic { get; set; }
+        [DataMember]
         public string BirthDate { get; set; }
         //public string Login { get; set; }
 
