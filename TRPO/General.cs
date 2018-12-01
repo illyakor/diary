@@ -11,6 +11,8 @@ using System.Windows.Forms;
 using System.Numerics;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
+using System.Diagnostics;
+using System.Threading;
 
 namespace TRPO
 {
@@ -26,7 +28,10 @@ namespace TRPO
         }
         private void ButtonRegistration_Click(object sender, EventArgs e)
         {
-            OpenRegistrationForm();
+            General.ActiveForm.Hide();
+            Registration regForm = new Registration(textBoxName.Text, textBoxSurname.Text, dateTimePickerBirthdate.Value);
+            regForm.ShowDialog();
+            Close();
         }
         private void ButtonPassword_Click(object sender, EventArgs e)
         {
@@ -58,15 +63,21 @@ namespace TRPO
             Menu menuForm = new Menu(textBoxLogin.Text);
             menuForm.Show();
         }
+        /*
         private void OpenRegistrationForm()
         {
-            this.Hide();
+            General.ActiveForm.Hide();
             Registration regForm = new Registration(textBoxName.Text, textBoxSurname.Text, dateTimePickerBirthdate.Value);
-            regForm.Show();
+            regForm.ShowDialog();
+            Close();
         }
-        private void General_FormClosing(object sender, FormClosingEventArgs e)
+        */
+        private void General_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Environment.Exit(0);
+            //System.Environment.FailFast("Палундра!");
+            //Process.GetCurrentProcess().Kill();
+            //Application.Exit();
+            System.Environment.Exit(0);
         }
         private void TextBoxLogin_KeyPress(object sender, KeyPressEventArgs e)
         {

@@ -45,5 +45,23 @@ namespace TRPO
             }
             return usersProf;
         }
+        public static Dictionary<string, string> WriteFileUser(Dictionary<string, string> newUsers)
+        {
+            DataContractJsonSerializer jsonFormatterUser = new DataContractJsonSerializer(typeof(Dictionary<string, string>));
+            using (FileStream fs = new FileStream("People.json", FileMode.OpenOrCreate))
+            {
+                jsonFormatterUser.WriteObject(fs, newUsers);
+            }
+            return newUsers;
+        }
+        public static Dictionary<string, User> WriteFileProf(Dictionary<string, User> newUserProf)
+        {
+            DataContractJsonSerializer jsonFormatterUser = new DataContractJsonSerializer(typeof(Dictionary<string, string>));
+            using (FileStream fs = new FileStream("ProfFile.json", FileMode.OpenOrCreate))
+            {
+                jsonFormatterUser.WriteObject(fs, newUserProf);
+            }
+            return newUserProf;
+        }
     }
 }

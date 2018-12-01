@@ -15,7 +15,7 @@ namespace TRPO
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new General());
+            Application.Run(new Starting());
         }
     }
 }

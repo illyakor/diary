@@ -299,7 +299,6 @@
             this.Name = "General";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Главная - Электронный дневник";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.General_FormClosing);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel3.ResumeLayout(false);

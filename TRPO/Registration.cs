@@ -18,10 +18,9 @@ namespace TRPO
         public Registration(string textbox1, string textbox2, DateTime datetimepicker1)
         {
             InitializeComponent();
-            nameTextBox.Text = textbox1;
+            nameTextBox.Text = textbox1;    
             surnameTextBox.Text = textbox2;
             dateTimePicker1.Value = datetimepicker1;
-
         }
         private void ButtonRegistration(object sender, EventArgs e)
         {
@@ -29,27 +28,20 @@ namespace TRPO
             {
                 Dictionary<string, string> newUsers = DataRepository.ReadFileUser();
                 newUsers[loginTextBox.Text] = passwordTextBox.Text;
-                DataContractJsonSerializer jsonFormatterUser = new DataContractJsonSerializer(typeof(Dictionary<string, string>));
-                using (FileStream fs = new FileStream("People.json", FileMode.OpenOrCreate))
-                {
-                    jsonFormatterUser.WriteObject(fs, newUsers);
-                }
+                newUsers = DataRepository.WriteFileUser(newUsers);
                 Dictionary<string, User> newUserProf = DataRepository.ReadFileProf();
                 newUserProf[loginTextBox.Text] = new User(nameTextBox.Text, surnameTextBox.Text, middleTextBox.Text, dateTimePicker1.Text);
-                DataContractJsonSerializer jsonFormatterProf = new DataContractJsonSerializer(typeof(Dictionary<string, User>));
-                using (FileStream fs = new FileStream("ProfFile.json", FileMode.OpenOrCreate))
-                {
-                    jsonFormatterProf.WriteObject(fs, newUserProf);
-                }
+                newUserProf = DataRepository.WriteFileProf(newUserProf);
                 MessageBox.Show(@"Вы успешно зарегистрированы!");
             }
             else MessageBox.Show(@"Заполнение всех полей обязательно!");
         }
         private void Label2_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            General form1 = new General();
-            form1.Show();
+            Registration.ActiveForm.Hide();
+            General genForm = new General();
+            genForm.ShowDialog();
+            Close();
         }
         private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
         {

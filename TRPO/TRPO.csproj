@@ -69,6 +69,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataRepository.cs" />
+    <Compile Include="Starting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Starting.Designer.cs">
+      <DependentUpon>Starting.cs</DependentUpon>
+    </Compile>
     <Compile Include="User.cs" />
     <Compile Include="TeachersAndClasses.cs">
       <SubType>Form</SubType>
@@ -120,6 +126,9 @@
     <Compile Include="0Menu.Designer.cs">
       <DependentUpon>0Menu.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Starting.resx">
+      <DependentUpon>Starting.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TeachersAndClasses.resx">
       <DependentUpon>TeachersAndClasses.cs</DependentUpon>
     </EmbeddedResource>
@@ -179,6 +188,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\глаз.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\7RQk.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\7RQq.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
