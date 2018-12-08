@@ -38,31 +38,20 @@ namespace TRPO
         }
         private void Label2_Click(object sender, EventArgs e)
         {
-            Registration.ActiveForm.Hide();
-            General genForm = new General();
-            genForm.ShowDialog();
-            Close();
+            General.GetGeneral().Show();
+            this.Close();
         }
         private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsLetter(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != '`' && e.KeyChar != '-')
-                e.Handled = true;
+            InputProtection.TextBox_KeyPress(sender, e);
         }
         private void LoginTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            char number = e.KeyChar;
-            if ((e.KeyChar <= 64 || e.KeyChar >= 91) && (e.KeyChar <= 96 || e.KeyChar >= 123) && e.KeyChar != 8 && (e.KeyChar <= 47 || e.KeyChar >= 58) && e.KeyChar != '@' && e.KeyChar != '.' && e.KeyChar != '-' && e.KeyChar != '_' && e.KeyChar != '`')
-                e.Handled = true;
-        }
-        private void Registration_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Environment.Exit(0);
+            InputProtection.LoginTextBox_KeyPress(sender, e);
         }
         private void PasswordTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            char number = e.KeyChar;
-            if ((e.KeyChar <= 64 || e.KeyChar >= 91) && (e.KeyChar <= 96 || e.KeyChar >= 123) && e.KeyChar != 8 && (e.KeyChar <= 47 || e.KeyChar >= 58))
-                e.Handled = true;
+            InputProtection.PasswordTextBox_KeyPress(sender, e);
         }
         private void Label2_MouseEnter(object sender, EventArgs e)
         {

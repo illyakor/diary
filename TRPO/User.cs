@@ -21,11 +21,9 @@ namespace TRPO
         public string Patronymic { get; set; }
         [DataMember]
         public string BirthDate { get; set; }
-        //public string Login { get; set; }
 
-        public User(/*string login,*/ string name, string lastName, string patronymic, string birthDate)
+        public User(string name, string lastName, string patronymic, string birthDate)
         {
-            //Login = login;
             Name = name;
             LastName = lastName;
             Patronymic = patronymic;

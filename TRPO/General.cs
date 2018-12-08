@@ -1,26 +1,30 @@
-﻿// rest
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.IO;
 using System.Windows.Forms;
+using System.IO;
 using System.Numerics;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
-using System.Diagnostics;
-using System.Threading;
 
 namespace TRPO
 {
     public partial class General : Form
-    { 
-        public General()
+    {
+        private static General general;
+        private General()
         {
             InitializeComponent();
+        }
+        public static General GetGeneral()
+        {
+            if (general == null)
+                general = new General();
+            return general;
         }
         private void ButtonInput_Click(object sender, EventArgs e)
         {
@@ -28,10 +32,7 @@ namespace TRPO
         }
         private void ButtonRegistration_Click(object sender, EventArgs e)
         {
-            General.ActiveForm.Hide();
-            Registration regForm = new Registration(textBoxName.Text, textBoxSurname.Text, dateTimePickerBirthdate.Value);
-            regForm.ShowDialog();
-            Close();
+            OpenRegistrationForm();
         }
         private void ButtonPassword_Click(object sender, EventArgs e)
         {
@@ -40,21 +41,13 @@ namespace TRPO
         private void ChekUser()
         {
             Dictionary<string, string> users = DataRepository.ReadFileUser();
-            if (users != null && users.ContainsKey(textBoxLogin.Text))
+            if (users != null && users.ContainsKey(textBoxLogin.Text) && users[textBoxLogin.Text] == textBoxPassword.Text)
             {
-                string password;
-                if ((password = users[textBoxLogin.Text]) == textBoxPassword.Text)
-                {
-                    OpenMenuForm();
-                }
-                else
-                {
-                    MessageBox.Show("Неверный введён пароль!");
-                }
+                OpenMenuForm();
             }
             else
             {
-                MessageBox.Show("Такого пользователя не существует!");
+                MessageBox.Show("Неверный введён логин или пароль!");
             }
         }
         private void OpenMenuForm()
@@ -63,38 +56,27 @@ namespace TRPO
             Menu menuForm = new Menu(textBoxLogin.Text);
             menuForm.Show();
         }
-        /*
         private void OpenRegistrationForm()
         {
-            General.ActiveForm.Hide();
+            this.Hide();
             Registration regForm = new Registration(textBoxName.Text, textBoxSurname.Text, dateTimePickerBirthdate.Value);
-            regForm.ShowDialog();
-            Close();
+            regForm.Show();
         }
-        */
         private void General_FormClosed(object sender, FormClosedEventArgs e)
         {
-            //System.Environment.FailFast("Палундра!");
-            //Process.GetCurrentProcess().Kill();
-            //Application.Exit();
             System.Environment.Exit(0);
         }
         private void TextBoxLogin_KeyPress(object sender, KeyPressEventArgs e)
         {
-            char number = e.KeyChar;
-            if ((e.KeyChar <= 64 || e.KeyChar >= 91) && (e.KeyChar <= 96 || e.KeyChar >= 123) && e.KeyChar != 8 && (e.KeyChar <= 47 || e.KeyChar >= 58) && e.KeyChar != '@' && e.KeyChar != '.' && e.KeyChar != '-' && e.KeyChar != '_' && e.KeyChar != '`')
-                e.Handled = true;
+            InputProtection.LoginTextBox_KeyPress(sender, e);
         }
         private void TextBoxPassword_KeyPress(object sender, KeyPressEventArgs e)
         {
-            char number = e.KeyChar;
-            if ((e.KeyChar <= 64 || e.KeyChar >= 91) && (e.KeyChar <= 96 || e.KeyChar >= 123) && e.KeyChar != 8 && (e.KeyChar <= 47 || e.KeyChar >= 58))
-                e.Handled = true;
+            InputProtection.PasswordTextBox_KeyPress(sender, e);
         }
         private void TextBoxNameAndSurname_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsLetter(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != '`' && e.KeyChar != '-')
-                e.Handled = true;
+            InputProtection.TextBox_KeyPress(sender, e);
         }
 
         private void ButtonInput_MouseEnter(object sender, EventArgs e)
@@ -108,3 +90,6 @@ namespace TRPO
         }
     }
 }
+//System.Environment.FailFast("Палундра!");
+//Process.GetCurrentProcess().Kill();
+//Application.Exit();

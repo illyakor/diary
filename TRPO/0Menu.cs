@@ -92,8 +92,8 @@ namespace TRPO
         private void LabelExit_Click(object sender, EventArgs e)
         {
             this.Hide();
-            General generalForm = new General();
-            generalForm.Show();
+            //General generalForm = new General();
+            //generalForm.Show();
         }
         private void LabelProfile_Click(object sender, EventArgs e)
         {
@@ -174,8 +174,8 @@ namespace TRPO
             fileForWriter.Close();
             MessageBox.Show(@"Удаление прошло успешно");
             this.Hide();
-            General generalForm = new General();
-            generalForm.Show();
+            //General generalForm = new General();
+            //generalForm.Show();
         }
         private void Menu_FormClosing(object sender, FormClosingEventArgs e)
         {
