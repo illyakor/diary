@@ -66,19 +66,6 @@ namespace TRPO
         {
             System.Environment.Exit(0);
         }
-        //private void TextBoxLogin_KeyPress(object sender, KeyPressEventArgs e)
-        //{
-        //    InputProtection.LoginTextBox_KeyPress(sender, e);
-        //}
-        //private void TextBoxPassword_KeyPress(object sender, KeyPressEventArgs e)
-        //{
-        //    InputProtection.PasswordTextBox_KeyPress(sender, e);
-        //}
-        //private void TextBoxNameAndSurname_KeyPress(object sender, KeyPressEventArgs e)
-        //{
-        //    InputProtection.TextBox_KeyPress(sender, e);
-        //}
-
         private void ButtonInput_MouseEnter(object sender, EventArgs e)
         {
             (sender as Control).BackColor = Color.DarkGreen;
