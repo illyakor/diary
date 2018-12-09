@@ -41,18 +41,18 @@ namespace TRPO
             General.GetGeneral().Show();
             this.Close();
         }
-        private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            InputProtection.TextBox_KeyPress(sender, e);
-        }
-        private void LoginTextBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            InputProtection.LoginTextBox_KeyPress(sender, e);
-        }
-        private void PasswordTextBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            InputProtection.PasswordTextBox_KeyPress(sender, e);
-        }
+        //private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
+        //{
+        //    InputProtection.TextBox_KeyPress(sender, e);
+        //}
+        //private void LoginTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        //{
+        //    InputProtection.LoginTextBox_KeyPress(sender, e);
+        //}
+        //private void PasswordTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        //{
+        //    InputProtection.PasswordTextBox_KeyPress(sender, e);
+        //}
         private void Button1_MouseEnter(object sender, EventArgs e)
         {
             (sender as Control).BackColor = Color.DarkGreen;

@@ -94,7 +94,7 @@
             this.textBoxLogin.Name = "textBoxLogin";
             this.textBoxLogin.Size = new System.Drawing.Size(273, 20);
             this.textBoxLogin.TabIndex = 5;
-            this.textBoxLogin.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxLogin_KeyPress);
+            this.textBoxLogin.KeyPress += new System.Windows.Forms.KeyPressEventHandler(InputProtection.LoginTextBox_KeyPress);
             // 
             // textBoxPassword
             // 
@@ -105,7 +105,7 @@
             this.textBoxPassword.PasswordChar = '*';
             this.textBoxPassword.Size = new System.Drawing.Size(273, 20);
             this.textBoxPassword.TabIndex = 6;
-            this.textBoxPassword.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxPassword_KeyPress);
+            this.textBoxPassword.KeyPress += new System.Windows.Forms.KeyPressEventHandler(InputProtection.PasswordTextBox_KeyPress);
             // 
             // buttonInput
             // 
@@ -223,7 +223,7 @@
             this.textBoxSurname.Name = "textBoxSurname";
             this.textBoxSurname.Size = new System.Drawing.Size(251, 20);
             this.textBoxSurname.TabIndex = 17;
-            this.textBoxSurname.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxNameAndSurname_KeyPress);
+            this.textBoxSurname.KeyPress += new System.Windows.Forms.KeyPressEventHandler(InputProtection.TextBox_KeyPress);
             // 
             // textBoxName
             // 
@@ -232,7 +232,7 @@
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.Size = new System.Drawing.Size(251, 20);
             this.textBoxName.TabIndex = 16;
-            this.textBoxName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxNameAndSurname_KeyPress);
+            this.textBoxName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(InputProtection.TextBox_KeyPress);
             // 
             // label6
             // 

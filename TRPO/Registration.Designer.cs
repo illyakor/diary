@@ -118,7 +118,7 @@
             this.surnameTextBox.Name = "surnameTextBox";
             this.surnameTextBox.Size = new System.Drawing.Size(249, 20);
             this.surnameTextBox.TabIndex = 8;
-            this.surnameTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
+            this.surnameTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(InputProtection.TextBox_KeyPress);
             // 
             // nameTextBox
             // 
@@ -128,7 +128,7 @@
             this.nameTextBox.Size = new System.Drawing.Size(249, 20);
             this.nameTextBox.TabIndex = 7;
             this.toolTip1.SetToolTip(this.nameTextBox, "Symbols used: \"A-Z\", \"a-z\", \' - \' , \' ` \' !");
-            this.nameTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
+            this.nameTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(InputProtection.TextBox_KeyPress);
             // 
             // label8
             // 
@@ -196,7 +196,7 @@
             this.middleTextBox.Name = "middleTextBox";
             this.middleTextBox.Size = new System.Drawing.Size(249, 20);
             this.middleTextBox.TabIndex = 18;
-            this.middleTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
+            this.middleTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(InputProtection.TextBox_KeyPress);
             // 
             // label13
             // 
@@ -238,7 +238,7 @@
             this.loginTextBox.Name = "loginTextBox";
             this.loginTextBox.Size = new System.Drawing.Size(249, 20);
             this.loginTextBox.TabIndex = 26;
-            this.loginTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.LoginTextBox_KeyPress);
+            this.loginTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(InputProtection.LoginTextBox_KeyPress);
             // 
             // passwordTextBox
             // 
@@ -249,7 +249,7 @@
             this.passwordTextBox.PasswordChar = '*';
             this.passwordTextBox.Size = new System.Drawing.Size(249, 20);
             this.passwordTextBox.TabIndex = 27;
-            this.passwordTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PasswordTextBox_KeyPress);
+            this.passwordTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(InputProtection.PasswordTextBox_KeyPress);
             // 
             // dateTimePicker1
             // 
