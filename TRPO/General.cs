@@ -47,7 +47,7 @@ namespace TRPO
             }
             else
             {
-                MessageBox.Show("Неверный введён логин или пароль!");
+                MessageBox.Show("Неверный введён логин и/или пароль!");
             }
         }
         private void OpenMenuForm()

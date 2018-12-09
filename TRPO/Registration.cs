@@ -53,17 +53,6 @@ namespace TRPO
         {
             InputProtection.PasswordTextBox_KeyPress(sender, e);
         }
-        private void Label2_MouseEnter(object sender, EventArgs e)
-        {
-            (sender as Control).ForeColor = Color.Blue;
-            Font underlineFont = new Font(DefaultFont.Name, DefaultFont.Size, FontStyle.Underline, DefaultFont.Unit, DefaultFont.GdiCharSet, DefaultFont.GdiVerticalFont);
-            ((Label)sender).Font = underlineFont;
-        }
-        private void Label2_MouseLeave(object sender, EventArgs e)
-        {
-            (sender as Control).ForeColor = Color.White;
-            ((Label)sender).Font = DefaultFont;
-        }
         private void Button1_MouseEnter(object sender, EventArgs e)
         {
             (sender as Control).BackColor = Color.DarkGreen;
@@ -71,6 +60,17 @@ namespace TRPO
         private void Button1_MouseLeave(object sender, EventArgs e)
         {
             (sender as Control).BackColor = System.Drawing.Color.FromArgb(0, 192, 0);
+        }
+        private void Label2_MouseLeave(object sender, EventArgs e)
+        {
+            (sender as Control).ForeColor = Color.White;
+            ((Label)sender).Font = DefaultFont;
+        }
+        private void Label2_MouseEnter(object sender, EventArgs e)
+        {
+            (sender as Control).ForeColor = Color.Blue;
+            Font underlineFont = new Font(DefaultFont.Name, DefaultFont.Size, FontStyle.Underline, DefaultFont.Unit, DefaultFont.GdiCharSet, DefaultFont.GdiVerticalFont);
+            ((Label)sender).Font = underlineFont;
         }
     }
 }
