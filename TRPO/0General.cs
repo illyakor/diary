@@ -6,10 +6,6 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.IO;
-using System.Numerics;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Json;
 
 namespace TRPO
 {
@@ -28,7 +24,7 @@ namespace TRPO
         }
         private void ButtonInput_Click(object sender, EventArgs e)
         {
-            ChekUser();
+            CheckUser();
         }
         private void ButtonRegistration_Click(object sender, EventArgs e)
         {
@@ -38,7 +34,7 @@ namespace TRPO
         {
             MessageBox.Show("Эта функция не реализована");
         }
-        private void ChekUser()
+        private void CheckUser()
         {
             Dictionary<string, string> users = DataRepository.ReadFileUser();
             if (users != null && users.ContainsKey(textBoxLogin.Text) && users[textBoxLogin.Text] == textBoxPassword.Text)
@@ -47,7 +43,7 @@ namespace TRPO
             }
             else
             {
-                MessageBox.Show("Неверный введён логин и/или пароль!");
+                MessageBox.Show("Неверно введён логин и/или пароль!");
             }
         }
         private void OpenMenuForm()

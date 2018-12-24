@@ -15,16 +15,12 @@ namespace TRPO
         {
             Dictionary<string, string> users = new Dictionary<string, string>();
             DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(Dictionary<string, string>));
-            using (FileStream fs = new FileStream("People.json", FileMode.OpenOrCreate))
+            using (FileStream fs = new FileStream("Users.json", FileMode.OpenOrCreate))
             {
-                try
-                {
+                if (fs.Length > 0)
                     users = (Dictionary<string, string>)jsonFormatter.ReadObject(fs);
-                }
-                catch
-                {
-                    //users = null;
-                }
+                else
+                    users = new Dictionary<string, string>();
             }
             return users;
         }
@@ -34,21 +30,17 @@ namespace TRPO
             DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(Dictionary<string, User>));
             using (FileStream fs = new FileStream("ProfFile.json", FileMode.OpenOrCreate))
             {
-                try
-                {
+                if (fs.Length > 0)
                     usersProf = (Dictionary<string, User>)jsonFormatter.ReadObject(fs);
-                }
-                catch
-                {
-                    //users = null;
-                }
+                else
+                    usersProf = new Dictionary<string, User>();
             }
             return usersProf;
         }
         public static Dictionary<string, string> WriteFileUser(Dictionary<string, string> newUsers)
         {
             DataContractJsonSerializer jsonFormatterUser = new DataContractJsonSerializer(typeof(Dictionary<string, string>));
-            using (FileStream fs = new FileStream("People.json", FileMode.OpenOrCreate))
+            using (FileStream fs = new FileStream("Users.json", FileMode.OpenOrCreate))
             {
                 jsonFormatterUser.WriteObject(fs, newUsers);
             }
@@ -56,7 +48,7 @@ namespace TRPO
         }
         public static Dictionary<string, User> WriteFileProf(Dictionary<string, User> newUserProf)
         {
-            DataContractJsonSerializer jsonFormatterUser = new DataContractJsonSerializer(typeof(Dictionary<string, string>));
+            DataContractJsonSerializer jsonFormatterUser = new DataContractJsonSerializer(typeof(Dictionary<string, User>));
             using (FileStream fs = new FileStream("ProfFile.json", FileMode.OpenOrCreate))
             {
                 jsonFormatterUser.WriteObject(fs, newUserProf);

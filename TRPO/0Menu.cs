@@ -16,12 +16,13 @@ namespace TRPO
         string[,,] schedule2 = new string[8, 2, 10];
         string[,] teachersAndClasses = new string[10, 24];
         string[,,] events = new string[24, 4, 10];
-        string[,] profiles = new string[10, 6];
         string[,] additionalInf = new string[10, 29];
         int count = 0, k = 0, i = 0, j = 0;
-        public Menu(string Login)
+        string LoginUser = "";
+        public Menu(string login)
         {
             InitializeComponent();
+            LoginUser = login;
             //count = counter;
             //profiles = bufDataArray;
             string bufDataRow = "";
@@ -91,13 +92,12 @@ namespace TRPO
         }
         private void LabelExit_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            //General generalForm = new General();
-            //generalForm.Show();
+            General.GetGeneral().Show();
+            this.Close();
         }
         private void LabelProfile_Click(object sender, EventArgs e)
         {
-            var shoolProfInfForm = new ShoolProfInf(count, profiles) { MdiParent = this };
+            var shoolProfInfForm = new ShoolProfInf(LoginUser) { MdiParent = this };
             shoolProfInfForm.Show();
         }
         private void LabelSchedule_Click(object sender, EventArgs e)
@@ -123,16 +123,7 @@ namespace TRPO
         private void ButtonDeleteAccount_Click(object sender, EventArgs e)
         {
             string dataRow = "";
-            StreamWriter fileForWriter = new StreamWriter("Profiles.txt");
-            for (i = 0; i < 10; i++)
-            {
-                dataRow = "";
-                if (i == count) dataRow = "||||||";
-                else for (k = 0; k < 6; k++) dataRow = dataRow + profiles[i, k] + '|';
-                fileForWriter.WriteLine(dataRow);
-            }
-            fileForWriter.Close();
-            fileForWriter = new StreamWriter("TeacherAndClasses.txt");
+            StreamWriter fileForWriter = new StreamWriter("TeacherAndClasses.txt");
             for (i = 0; i < 10; i++)
             {
                 dataRow = "";
@@ -177,10 +168,6 @@ namespace TRPO
             //General generalForm = new General();
             //generalForm.Show();
         }
-        private void Menu_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Environment.Exit(0);
-        }
         private void Label_MouseEnter(object sender, EventArgs e)
         {
             (sender as Control).ForeColor = Color.Blue;
@@ -189,7 +176,7 @@ namespace TRPO
         }
         private void Label_MouseLeave(object sender, EventArgs e)
         {
-            (sender as Control).ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            (sender as Control).ForeColor = System.Drawing.Color.FromArgb(0, 192, 0);
             ((Label)sender).Font = DefaultFont;
             labelExit.ForeColor = Color.White;
         }

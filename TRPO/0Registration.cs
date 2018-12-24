@@ -5,11 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.IO;
 using System.Windows.Forms;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Json;
-using System.Threading.Tasks;
 
 namespace TRPO
 {
@@ -18,20 +14,20 @@ namespace TRPO
         public Registration(string textbox1, string textbox2, DateTime datetimepicker1)
         {
             InitializeComponent();
-            nameTextBox.Text = textbox1;    
-            surnameTextBox.Text = textbox2;
+            LastNameTextBox.Text = textbox1;    
+            NameTextBox.Text = textbox2;
             dateTimePicker1.Value = datetimepicker1;
         }
         private void ButtonRegistration(object sender, EventArgs e)
         {
-            if (nameTextBox.Text != "" && surnameTextBox.Text != "" && middleTextBox.Text != "" && loginTextBox.Text != "" && passwordTextBox.Text != "")
+            if (AllFieldsValid())
             {
                 Dictionary<string, string> newUsers = DataRepository.ReadFileUser();
-                newUsers[loginTextBox.Text] = passwordTextBox.Text;
-                newUsers = DataRepository.WriteFileUser(newUsers);
+                newUsers[LoginTextBox.Text] = PasswordTextBox.Text;
+                DataRepository.WriteFileUser(newUsers);
                 Dictionary<string, User> newUserProf = DataRepository.ReadFileProf();
-                newUserProf[loginTextBox.Text] = new User(nameTextBox.Text, surnameTextBox.Text, middleTextBox.Text, dateTimePicker1.Text);
-                newUserProf = DataRepository.WriteFileProf(newUserProf);
+                newUserProf[LoginTextBox.Text] = new User(LastNameTextBox.Text, NameTextBox.Text, PatronymicTextBox.Text, dateTimePicker1.Text);
+                DataRepository.WriteFileProf(newUserProf);
                 MessageBox.Show(@"Вы успешно зарегистрированы!");
             }
             else MessageBox.Show(@"Заполнение всех полей обязательно!");
@@ -40,6 +36,11 @@ namespace TRPO
         {
             General.GetGeneral().Show();
             this.Close();
+        }
+        private bool AllFieldsValid()
+        {
+            return (LastNameTextBox.Text != "" && NameTextBox.Text != "" && PatronymicTextBox.Text != "" && LoginTextBox.Text != "" &&
+                PasswordTextBox.Text != "");
         }
         private void Button1_MouseEnter(object sender, EventArgs e)
         {
@@ -57,7 +58,8 @@ namespace TRPO
         private void Label2_MouseEnter(object sender, EventArgs e)
         {
             (sender as Control).ForeColor = Color.Blue;
-            Font underlineFont = new Font(DefaultFont.Name, DefaultFont.Size, FontStyle.Underline, DefaultFont.Unit, DefaultFont.GdiCharSet, DefaultFont.GdiVerticalFont);
+            Font underlineFont = new Font(DefaultFont.Name, DefaultFont.Size, FontStyle.Underline, DefaultFont.Unit, DefaultFont.GdiCharSet, 
+                DefaultFont.GdiVerticalFont);
             ((Label)sender).Font = underlineFont;
         }
     }
