@@ -10,18 +10,12 @@ namespace TRPO
     public class Week
     {
         [DataMember]
-        public List<Day> week = new List<Day>(6);
+        public List<Day> week;
+        public static int dayCount = 6;
 
         public Week(List<Day> week)
         {
             this.week = week;
         }
-        /*
-        public List<Day> Week
-        {
-            get { return week; }
-            set { week = value; }
-        }
-        */
     }
 }

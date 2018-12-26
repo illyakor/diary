@@ -10,7 +10,8 @@ namespace TRPO
     public class Day
     {
         [DataMember]
-        public List<string> day = new List<string>(8);
+        public List<string> day;
+        public static int lessonCount = 8;
 
         public Day(List<string> day)
         {
