@@ -69,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataRepository.cs" />
+    <Compile Include="Day.cs" />
     <Compile Include="InputProtection.cs" />
     <Compile Include="User.cs" />
     <Compile Include="TeachersAndClasses.cs">
@@ -121,6 +122,7 @@
     <Compile Include="0Menu.Designer.cs">
       <DependentUpon>0Menu.cs</DependentUpon>
     </Compile>
+    <Compile Include="Week.cs" />
     <EmbeddedResource Include="TeachersAndClasses.resx">
       <DependentUpon>TeachersAndClasses.cs</DependentUpon>
     </EmbeddedResource>

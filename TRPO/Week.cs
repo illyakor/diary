@@ -1,0 +1,27 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Runtime.Serialization;
+
+namespace TRPO
+{
+    [DataContract]
+    public class Week
+    {
+        [DataMember]
+        public List<Day> week = new List<Day>(6);
+
+        public Week(List<Day> week)
+        {
+            this.week = week;
+        }
+        /*
+        public List<Day> Week
+        {
+            get { return week; }
+            set { week = value; }
+        }
+        */
+    }
+}

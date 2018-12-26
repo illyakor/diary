@@ -11,42 +11,37 @@ namespace TRPO
 {
     public partial class ShoolProfInf : Form
     {
-        Dictionary<string, string> User = DataRepository.ReadFileUser();
-        Dictionary<string, User> UserProf = DataRepository.ReadFileProf();
-        string LoginUser;
+        Dictionary<string, string> user = DataRepository.ReadFileUser();
+        Dictionary<string, User> userProf = DataRepository.ReadFileProf();
+        string loginUser;
         public ShoolProfInf(string login)
         {
             InitializeComponent();
-            LoginUser = login;
-            FillBox();
+            loginUser = login;
+            FillBoxes();
         }
         private void ButtonSave_Click(object sender, EventArgs e)
         {
-            if (LoginUser != LoginTextBox.Text)
+            if (loginUser != LoginTextBox.Text)
             {
-                UserProf.Remove(LoginUser);
-                User.Remove(LoginUser);
-
-                User[LoginTextBox.Text] = PasswordTextBox.Text;
-                UserProf[LoginTextBox.Text] = new User(LastNameTextBox.Text, NameTextBox.Text, PatronymicTextBox.Text, dateTimePicker1.Text);
+                userProf.Remove(loginUser);
+                user.Remove(loginUser);
+                loginUser = LoginTextBox.Text;
             }
-            else
-            {
-                User[LoginUser] = PasswordTextBox.Text;
-                UserProf[LoginUser] = new User(LastNameTextBox.Text, NameTextBox.Text, PatronymicTextBox.Text, dateTimePicker1.Text);
-            }
-
-            DataRepository.WriteFileProf(UserProf);
-            DataRepository.WriteFileUser(User);
+            user[loginUser] = PasswordTextBox.Text;
+            userProf[loginUser] = new User(LastNameTextBox.Text, NameTextBox.Text, PatronymicTextBox.Text, dateTimePicker1.Text);
+            DataRepository.WriteFileProf(userProf);
+            DataRepository.WriteFileUser(user);
+            MessageBox.Show("Сохранение прошло успешно!");
         }
-        public void FillBox()
+        public void FillBoxes()
         {
-            LastNameTextBox.Text = UserProf[LoginUser].LastName;
-            NameTextBox.Text = UserProf[LoginUser].Name;
-            PatronymicTextBox.Text = UserProf[LoginUser].Patronymic;
-            LoginTextBox.Text = LoginUser;
-            PasswordTextBox.Text = User[LoginUser];
-            dateTimePicker1.Text = UserProf[LoginUser].BirthDate;
+            LastNameTextBox.Text = userProf[loginUser].LastName;
+            NameTextBox.Text = userProf[loginUser].Name;
+            PatronymicTextBox.Text = userProf[loginUser].Patronymic;
+            LoginTextBox.Text = loginUser;
+            PasswordTextBox.Text = user[loginUser];
+            dateTimePicker1.Text = userProf[loginUser].BirthDate;
         }
     }
 }

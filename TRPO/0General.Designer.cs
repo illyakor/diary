@@ -45,8 +45,8 @@
             this.label7 = new System.Windows.Forms.Label();
             this.textBoxSurname = new System.Windows.Forms.TextBox();
             this.textBoxName = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.buttonRegistration = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
@@ -94,7 +94,6 @@
             this.textBoxLogin.Name = "textBoxLogin";
             this.textBoxLogin.Size = new System.Drawing.Size(273, 20);
             this.textBoxLogin.TabIndex = 5;
-            this.textBoxLogin.KeyPress += new System.Windows.Forms.KeyPressEventHandler(InputProtection.LoginTextBox_KeyPress);
             // 
             // textBoxPassword
             // 
@@ -105,7 +104,6 @@
             this.textBoxPassword.PasswordChar = '*';
             this.textBoxPassword.Size = new System.Drawing.Size(273, 20);
             this.textBoxPassword.TabIndex = 6;
-            this.textBoxPassword.KeyPress += new System.Windows.Forms.KeyPressEventHandler(InputProtection.PasswordTextBox_KeyPress);
             // 
             // buttonInput
             // 
@@ -173,8 +171,8 @@
             this.panel4.Controls.Add(this.label7);
             this.panel4.Controls.Add(this.textBoxSurname);
             this.panel4.Controls.Add(this.textBoxName);
-            this.panel4.Controls.Add(this.label6);
             this.panel4.Controls.Add(this.label5);
+            this.panel4.Controls.Add(this.label6);
             this.panel4.Controls.Add(this.buttonRegistration);
             this.panel4.Controls.Add(this.label4);
             this.panel4.Location = new System.Drawing.Point(535, 207);
@@ -223,7 +221,6 @@
             this.textBoxSurname.Name = "textBoxSurname";
             this.textBoxSurname.Size = new System.Drawing.Size(251, 20);
             this.textBoxSurname.TabIndex = 17;
-            this.textBoxSurname.KeyPress += new System.Windows.Forms.KeyPressEventHandler(InputProtection.TextBox_KeyPress);
             // 
             // textBoxName
             // 
@@ -232,29 +229,28 @@
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.Size = new System.Drawing.Size(251, 20);
             this.textBoxName.TabIndex = 16;
-            this.textBoxName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(InputProtection.TextBox_KeyPress);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.label6.Location = new System.Drawing.Point(11, 72);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(108, 17);
-            this.label6.TabIndex = 15;
-            this.label6.Text = "Ваша фамилия";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.label5.Location = new System.Drawing.Point(46, 46);
+            this.label5.Location = new System.Drawing.Point(11, 47);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(73, 17);
-            this.label5.TabIndex = 14;
-            this.label5.Text = "Ваше имя";
+            this.label5.Size = new System.Drawing.Size(108, 17);
+            this.label5.TabIndex = 15;
+            this.label5.Text = "Ваша фамилия";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.label6.Location = new System.Drawing.Point(46, 73);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(73, 17);
+            this.label6.TabIndex = 14;
+            this.label6.Text = "Ваше имя";
             // 
             // buttonRegistration
             // 
@@ -326,8 +322,8 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox textBoxSurname;
         private System.Windows.Forms.TextBox textBoxName;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button buttonRegistration;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DateTimePicker dateTimePickerBirthdate;

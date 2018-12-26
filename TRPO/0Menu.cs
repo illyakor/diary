@@ -102,7 +102,7 @@ namespace TRPO
         }
         private void LabelSchedule_Click(object sender, EventArgs e)
         {
-            var scheduleForm = new Schedule(count, schedule1, schedule2) { MdiParent = this };
+            var scheduleForm = new Schedule() { MdiParent = this };
             scheduleForm.Show();
         }
         private void LabelTeacherAndClasses_Click(object sender, EventArgs e)
