@@ -12,10 +12,12 @@ namespace TRPO
 {
     public partial class TeachersAndClasses : Form
     {
+        int counter;
+        string[,] bufData;
         string[,] teacherAndClasses = new string[10, 24];
         int k = 0, count = 0;
         string[] classes = { "бел. язык", "бел. лит.", "русск. язык", "русск. лит.", "англ. язык", "немецк. язык", "математика", "информат.", "чел. и мир", "ист. Беларуси", "мировая ист.", "общствед.", "география", "биология", "физика", "астрономия", "химия", "труд. обуч.", "черчение", "физ. к. и зд.", "ДПЮ", "мед. подгот.", "ОБЖ", "Мастацтва"};
-        public TeachersAndClasses(int counter, string[,] bufData)
+        public TeachersAndClasses()
         {
             InitializeComponent();
             count = counter;

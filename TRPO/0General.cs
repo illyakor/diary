@@ -6,12 +6,14 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace TRPO
 {
     public partial class General : Form
     {
         private static General general;
+        public static string newLoginUser, loginUser;
         private General()
         {
             InitializeComponent();
@@ -48,8 +50,12 @@ namespace TRPO
         }
         private void OpenMenuForm()
         {
+            loginUser = textBoxLogin.Text;
+            newLoginUser = textBoxLogin.Text;
             this.Hide();
-            Menu menuForm = new Menu(textBoxLogin.Text);
+            Menu menuForm = new Menu();
+            textBoxLogin.Text = "";
+            textBoxPassword.Text = "";
             menuForm.Show();
         }
         private void OpenRegistrationForm()

@@ -5,6 +5,7 @@ using System.Text;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
+using System.Xml.Serialization;
 using System.Threading.Tasks;
 
 namespace TRPO
@@ -74,6 +75,35 @@ namespace TRPO
             using (FileStream fs = new FileStream("Schedule.json", FileMode.OpenOrCreate))
             {
                 jsonFormatterUser.WriteObject(fs, newSchedule);
+            }
+            return newSchedule;
+        }
+
+        public static Dictionary<string, Week> ReadFileScheduleXML()
+        {
+            
+            Dictionary<string, Week> schedule = new Dictionary<string, Week>();
+            var x1 = new DataContractSerializer(typeof(Dictionary<string, Week>)); 
+            using (FileStream fs = new FileStream("Schedule0.xml", FileMode.OpenOrCreate))
+            {
+                if (fs.Length > 0)
+                {
+                    schedule = (Dictionary<string, Week>)x1.ReadObject(fs);
+                    //schedule = new Dictionary<string, Week>();
+                    //xmlFormatter.Serialize(fs, schedule);
+                }
+                else
+                    schedule = new Dictionary<string, Week>();
+            }
+            
+            return schedule;
+        }
+        public static Dictionary<string, Week> WriteFileScheduleXML(Dictionary<string, Week> newSchedule)
+        {
+            var x1 = new DataContractSerializer(typeof(Dictionary<string, Week>));
+            using (FileStream fs = new FileStream("Schedule0.xml", FileMode.OpenOrCreate))
+            {
+                x1.WriteObject(fs, newSchedule);
             }
             return newSchedule;
         }

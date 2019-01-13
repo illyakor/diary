@@ -12,7 +12,7 @@ namespace TRPO
 {
     public partial class Schedule : Form
     {
-        Dictionary<string, Week> scheduleUser = DataRepository.ReadFileSchedule();
+        Dictionary<string, Week> scheduleUser = DataRepository.ReadFileScheduleXML();
         // глобальные перменные
         int k = 0, count = 0, q = 0;
         // создание массива расписания факультативов
@@ -24,7 +24,7 @@ namespace TRPO
         // массив расписания звонков
         string[] call = { "Звонки", "09:00 - 09:45", "09:55 - 10:40", "10:55 - 11:40", "11:55 - 12:40", "12:55 - 13:40", "13:50 - 14:35", " ", " " };
         // нумерация для лучшей навигации по таблицам dataDridView1 и dataDridView3
-        string number = "№12345678", loginUser = "Qwe";
+        string number = "№12345678", loginUser = "QWE";
         public Schedule()
         {
             InitializeComponent();
@@ -102,7 +102,7 @@ namespace TRPO
         }
         public void FillAddGrid()
         {
-            // цикл создания пустой таблицы dataGridView3 для нумерации предметов и расписания звонков
+            // цикл создания пустой таблицы для нумерации предметов и расписания звонков
             for (k = 0; k < Day.lessonCount; k++) addGrid.Rows.Add("", "");
             for (k = 0; k < Day.lessonCount + 1; k++)
             {
@@ -114,14 +114,19 @@ namespace TRPO
         }
         private void Button1_Click(object sender, EventArgs e)
         {
+            Week s1 = new Week(new List<Day>());
             for (q = 0; q < Week.dayCount; q++)
             {
+                Day s2 = new Day(new List<string>());
                 for (k = 0; k < Day.lessonCount; k++)
                 {
-                    scheduleUser[loginUser].week[q].day[k] = Convert.ToString(gridSchedule[q, k].Value);
+                    s2.day.Add(Convert.ToString(gridSchedule[q, k].Value));
+                    //scheduleUser[loginUser].week[q].day[k] = Convert.ToString(gridSchedule[q, k].Value);
                 }
+                s1.week.Add(s2);
             }
-            DataRepository.WriteFileSchedule(scheduleUser);
+            scheduleUser[loginUser] = s1;
+            DataRepository.WriteFileScheduleXML(scheduleUser);
             MessageBox.Show("Сохранение прошло успешно!");
         }
     }

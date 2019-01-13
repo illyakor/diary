@@ -11,37 +11,36 @@ namespace TRPO
 {
     public partial class ShoolProfInf : Form
     {
-        Dictionary<string, string> user = DataRepository.ReadFileUser();
+        Dictionary<string, string> user;
         Dictionary<string, User> userProf = DataRepository.ReadFileProf();
-        string loginUser;
-        public ShoolProfInf(string login)
+        public ShoolProfInf()
         {
             InitializeComponent();
-            loginUser = login;
+            user = DataRepository.ReadFileUser();
             FillBoxes();
         }
         private void ButtonSave_Click(object sender, EventArgs e)
         {
-            if (loginUser != LoginTextBox.Text)
+            if (General.loginUser != LoginTextBox.Text)
             {
-                userProf.Remove(loginUser);
-                user.Remove(loginUser);
-                loginUser = LoginTextBox.Text;
+                userProf.Remove(General.loginUser);
+                user.Remove(General.loginUser);
+                General.newLoginUser = LoginTextBox.Text;
             }
-            user[loginUser] = PasswordTextBox.Text;
-            userProf[loginUser] = new User(LastNameTextBox.Text, NameTextBox.Text, PatronymicTextBox.Text, dateTimePicker1.Text);
+            user[General.newLoginUser] = PasswordTextBox.Text;
+            userProf[General.newLoginUser] = new User(LastNameTextBox.Text, NameTextBox.Text, PatronymicTextBox.Text, dateTimePicker1.Text);
             DataRepository.WriteFileProf(userProf);
             DataRepository.WriteFileUser(user);
             MessageBox.Show("Сохранение прошло успешно!");
         }
         public void FillBoxes()
         {
-            LastNameTextBox.Text = userProf[loginUser].LastName;
-            NameTextBox.Text = userProf[loginUser].Name;
-            PatronymicTextBox.Text = userProf[loginUser].Patronymic;
-            LoginTextBox.Text = loginUser;
-            PasswordTextBox.Text = user[loginUser];
-            dateTimePicker1.Text = userProf[loginUser].BirthDate;
+            LastNameTextBox.Text = userProf[General.newLoginUser].LastName;
+            NameTextBox.Text = userProf[General.newLoginUser].Name;
+            PatronymicTextBox.Text = userProf[General.newLoginUser].Patronymic;
+            LoginTextBox.Text = General.newLoginUser;
+            PasswordTextBox.Text = user[General.newLoginUser];
+            dateTimePicker1.Text = userProf[General.newLoginUser].BirthDate;
         }
     }
 }

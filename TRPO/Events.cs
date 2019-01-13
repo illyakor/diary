@@ -12,10 +12,12 @@ namespace TRPO
 {
     public partial class Events : Form
     {
+        int counter;
+        string[,,] bufData;
         int k = 0, count = 0;
         string[,,] events = new string[24, 4, 10];
         DateTimePicker dateTimePicker1;
-        public Events(int counter, string[,,] bufData)
+        public Events()
         {
             InitializeComponent();
             count = counter;
