@@ -60,7 +60,7 @@ namespace TRPO
         {
             Dictionary<string, Week> schedule = new Dictionary<string, Week>();
             DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(Dictionary<string, Week>));
-            using (FileStream fs = new FileStream("Schedule.json", FileMode.OpenOrCreate))
+            using (FileStream fs = new FileStream("ScheduleJSON.json", FileMode.OpenOrCreate))
             {
                 if (fs.Length > 0)
                     schedule = (Dictionary<string, Week>)jsonFormatter.ReadObject(fs);
@@ -72,26 +72,21 @@ namespace TRPO
         public static Dictionary<string, Week> WriteFileSchedule(Dictionary<string, Week> newSchedule)
         {
             DataContractJsonSerializer jsonFormatterUser = new DataContractJsonSerializer(typeof(Dictionary<string, Week>));
-            using (FileStream fs = new FileStream("Schedule.json", FileMode.OpenOrCreate))
+            using (FileStream fs = new FileStream("ScheduleJSON.json", FileMode.OpenOrCreate))
             {
                 jsonFormatterUser.WriteObject(fs, newSchedule);
             }
             return newSchedule;
         }
-
         public static Dictionary<string, Week> ReadFileScheduleXML()
         {
             
             Dictionary<string, Week> schedule = new Dictionary<string, Week>();
             var x1 = new DataContractSerializer(typeof(Dictionary<string, Week>)); 
-            using (FileStream fs = new FileStream("Schedule0.xml", FileMode.OpenOrCreate))
+            using (FileStream fs = new FileStream("ScheduleXML.xml", FileMode.OpenOrCreate))
             {
                 if (fs.Length > 0)
-                {
                     schedule = (Dictionary<string, Week>)x1.ReadObject(fs);
-                    //schedule = new Dictionary<string, Week>();
-                    //xmlFormatter.Serialize(fs, schedule);
-                }
                 else
                     schedule = new Dictionary<string, Week>();
             }
@@ -101,7 +96,7 @@ namespace TRPO
         public static Dictionary<string, Week> WriteFileScheduleXML(Dictionary<string, Week> newSchedule)
         {
             var x1 = new DataContractSerializer(typeof(Dictionary<string, Week>));
-            using (FileStream fs = new FileStream("Schedule0.xml", FileMode.OpenOrCreate))
+            using (FileStream fs = new FileStream("ScheduleXML.xml", FileMode.OpenOrCreate))
             {
                 x1.WriteObject(fs, newSchedule);
             }

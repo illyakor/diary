@@ -12,32 +12,35 @@ namespace TRPO
 {
     public partial class Schedule : Form
     {
-        Dictionary<string, Week> scheduleUser = DataRepository.ReadFileScheduleXML();
         // глобальные перменные
+        Dictionary<string, Week> scheduleUser = DataRepository.ReadFileSchedule();
         int k = 0, count = 0, q = 0;
         // создание массива расписания факультативов
         string[,,] schedule2 = new string[8, 2, 10];
         // список предметов
-        string[] classes = { " ", "бел. язык", "бел. лит.", "русск. язык", "русск. лит.", "англ. язык", "немецк. язык", "математика", "информат.", "чел. и мир", "ист. Беларуси", "мировая ист.", "общствед.", "география", "биология", "физика", "астрономия", "химия", "труд. обуч.", "черчение", "физ. к. и зд.", "ДПЮ", "мед. подгот.", "ОБЖ", "Мастацтва"};
+        string[] classes = { " ", "бел. язык", "бел. лит.", "русск. язык", "русск. лит.", "англ. язык", "немецк. язык", "математика", "информат.",
+            "чел. и мир", "ист. Беларуси", "мировая ист.", "общствед.", "география", "биология", "физика", "астрономия", "химия", "труд. обуч.",
+            "черчение", "физ. к. и зд.", "ДПЮ", "мед. подгот.", "ОБЖ", "Мастацтва"};
         // список дней недели
         string[] days = { " ", "понедельник", "вторник", "среда", "четверг", "пятница", "суббота" };
         // массив расписания звонков
-        string[] call = { "Звонки", "09:00 - 09:45", "09:55 - 10:40", "10:55 - 11:40", "11:55 - 12:40", "12:55 - 13:40", "13:50 - 14:35", " ", " " };
-        // нумерация для лучшей навигации по таблицам dataDridView1 и dataDridView3
-        string number = "№12345678", loginUser = "QWE";
+        string[] numberAndCall = { "1 | 09:00 - 09:45", "2 | 09:55 - 10:40", "3 | 10:55 - 11:40", "4 | 11:55 - 12:40", "5 | 12:55 - 13:40",
+            "6 | 13:50 - 14:35", "7 |  ", "8 |  " };
+        string loginUser = "QWE";
         public Schedule()
         {
             InitializeComponent();
             //loginUser = login;
             //week = scheduleUser[loginUser].week;
             FillGridSchedule();
-            FillAddGrid();
             //FillGrid2();
         }
         public void FillGridSchedule()
         {
             // количество строк в dataGridView1
             this.gridSchedule.RowCount = Day.lessonCount + 1;
+            // заполнение заголовок строк
+            for (q = 0; q < Day.lessonCount; q++) gridSchedule.Rows[q].HeaderCell.Value = numberAndCall[q];
             // цикл заполнения таблицы dataGridView1 соответствующим расписанием предметов
             for (k = 0; k < Week.dayCount; k++)
             {
@@ -100,19 +103,7 @@ namespace TRPO
             // отмена добавления последней строчки в таблице dataGridView2
             dataGridView2.AllowUserToAddRows = false;
         }
-        public void FillAddGrid()
-        {
-            // цикл создания пустой таблицы для нумерации предметов и расписания звонков
-            for (k = 0; k < Day.lessonCount; k++) addGrid.Rows.Add("", "");
-            for (k = 0; k < Day.lessonCount + 1; k++)
-            {
-                // заполнение таблицы нумерацией предметов
-                addGrid[0, k].Value = number[k];
-                // заполнение таблицы расписанием звонков
-                addGrid[1, k].Value = call[k];
-            } 
-        }
-        private void Button1_Click(object sender, EventArgs e)
+        private void ButtonSave_Click(object sender, EventArgs e)
         {
             Week s1 = new Week(new List<Day>());
             for (q = 0; q < Week.dayCount; q++)
@@ -125,8 +116,18 @@ namespace TRPO
                 }
                 s1.week.Add(s2);
             }
+            /*
+            for (q = Week.dayCount - 1; q > -1; q--)
+            {
+                for (k = Day.lessonCount - 1; k > -1; k--)
+                {
+                    s2.day.Add(Convert.ToString(gridSchedule[q, k].Value));
+                }
+                s1.week.Add(s2);
+            }
+            */
             scheduleUser[loginUser] = s1;
-            DataRepository.WriteFileScheduleXML(scheduleUser);
+            DataRepository.WriteFileSchedule(scheduleUser);
             MessageBox.Show("Сохранение прошло успешно!");
         }
     }

@@ -18,7 +18,5 @@ namespace TRPO
         {
             this.week = week;
         }
-        public Week()
-        { }
     }
 }

@@ -18,7 +18,5 @@ namespace TRPO
         {
             this.day = day;
         }
-        public Day()
-        { }
     }
 }
