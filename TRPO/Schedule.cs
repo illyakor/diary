@@ -7,66 +7,112 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 
 namespace TRPO
 {
     public partial class Schedule : Form
     {
+        public string connect = "server=localhost;user=root;database=diarydb;password=toor;charset=utf8";
         // глобальные перменные
-        Dictionary<string, Week> scheduleUser = DataRepository.ReadFileSchedule();
+        DataTable scheduleUser;
         int k = 0, count = 0, q = 0;
         // создание массива расписания факультативов
         string[,,] schedule2 = new string[8, 2, 10];
         // список предметов
-        string[] classes = { " ", "бел. язык", "бел. лит.", "русск. язык", "русск. лит.", "англ. язык", "немецк. язык", "математика", "информат.",
-            "чел. и мир", "ист. Беларуси", "мировая ист.", "общствед.", "география", "биология", "физика", "астрономия", "химия", "труд. обуч.",
-            "черчение", "физ. к. и зд.", "ДПЮ", "мед. подгот.", "ОБЖ", "Мастацтва"};
+        string[] classes = { " ", "бел. язык", "бел. лит.", "русск. язык", "русск. лит.", "англ. язык", "немецк. язык", "математика", "информат.", "чел. и мир", "ист. Беларуси", "мировая ист.", "общствед.", "география", "биология", "физика", "астрономия", "химия", "труд. обуч.", "черчение", "физ. к. и зд.", "ДПЮ", "мед. подгот.", "ОБЖ", "Мастацтва"};
         // список дней недели
         string[] days = { " ", "понедельник", "вторник", "среда", "четверг", "пятница", "суббота" };
         // массив расписания звонков
-        string[] numberAndCall = { "1 | 09:00 - 09:45", "2 | 09:55 - 10:40", "3 | 10:55 - 11:40", "4 | 11:55 - 12:40", "5 | 12:55 - 13:40",
-            "6 | 13:50 - 14:35", "7 |  ", "8 |  " };
-        string loginUser = "QWE";
+        string[] numberAndCall = { "1 | 09:00 - 09:45", "2 | 09:55 - 10:40", "3 | 10:55 - 11:40", "4 | 11:55 - 12:40", "5 | 12:55 - 13:40", "6 | 13:50 - 14:35", "7 | ", "8 | " };
+        string loginUser = "QWE", buff;
         public Schedule()
         {
             InitializeComponent();
             //loginUser = login;
-            //week = scheduleUser[loginUser].week;
             FillGridSchedule();
             //FillGrid2();
         }
         public void FillGridSchedule()
         {
-            // количество строк в dataGridView1
-            this.gridSchedule.RowCount = Day.lessonCount + 1;
             // заполнение заголовок строк
             for (q = 0; q < Day.lessonCount; q++) gridSchedule.Rows[q].HeaderCell.Value = numberAndCall[q];
+            // внесение списка предметов в выбор для редактирования
+            this.dataGridViewTextBoxColumn11.Items.AddRange(classes);
+            this.dataGridViewTextBoxColumn12.Items.AddRange(classes);
+            this.dataGridViewTextBoxColumn13.Items.AddRange(classes);
+            this.dataGridViewTextBoxColumn14.Items.AddRange(classes);
+            this.dataGridViewTextBoxColumn15.Items.AddRange(classes);
+            this.dataGridViewTextBoxColumn16.Items.AddRange(classes);
+            //
+            string cmdMysql = "SHOW TABLES;";
+            MySqlConnection mySqlConn = new MySqlConnection(connect);
+            using (MySqlCommand cmd = new MySqlCommand(cmdMysql, mySqlConn))
+            {
+                buff = cmd.ExecuteScalar().ToString();
+                /*
+                MySqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                     
+                }
+                else
+                {
+                    
+                }
+                */
+                //inv.Load(dr);
+                //dr.Close();
+            }
+
+            gridSchedule.DataSource = scheduleUser;
+
             // цикл заполнения таблицы dataGridView1 соответствующим расписанием предметов
             for (k = 0; k < Week.dayCount; k++)
             {
                 for (q = 0; q < Day.lessonCount; q++)
                 {
-                    // изменение свойства ячейки из textBox в comboBox
-                    DataGridViewComboBoxCell cell = new DataGridViewComboBoxCell();
-                    // внесение списка предметов в выбор для редактирования
-                    cell.Items.AddRange(classes);
-                    // внесение предмета соответствующего профиля из массива расписания занятий
-                    if (scheduleUser.Count > 0)
-                    {
-                        cell.Value = scheduleUser[loginUser].week[k].day[q];
-                    }
-                    else
-                    {
-                        cell.Value = " ";
-                    }
-                    // вывод списка предметов и предмета соответствующего с расписанием занятий
-                    gridSchedule.Rows[q].Cells[k] = cell;
+                    // вывод предмета соответствующего с расписанием занятий
+                    gridSchedule.Rows[q].Cells[k].Value = " ";
                 }
-                // ширина всех столбцов в dataGridView1
-                gridSchedule.Columns[k].Width = 103;
             }
-            // отмена добавления последней строчки в таблице dataGridView1
-            gridSchedule.AllowUserToAddRows = false;
+        }
+        private void ButtonSave_Click(object sender, EventArgs e)
+        {
+            /*
+            Week s1 = new Week(new List<Day>());
+            for (q = 0; q < Week.dayCount; q++)
+            {
+                Day s2 = new Day(new List<string>());
+                for (k = 0; k < Day.lessonCount; k++)
+                {
+                    s2.day.Add(Convert.ToString(gridSchedule[q, k].Value));
+                    //scheduleUser[loginUser].week[q].day[k] = Convert.ToString(gridSchedule[q, k].Value);
+                }
+                s1.week.Add(s2);
+            }
+            
+            for (q = Week.dayCount - 1; q > -1; q--)
+            {
+                for (k = Day.lessonCount - 1; k > -1; k--)
+                {
+                    s2.day.Add(Convert.ToString(gridSchedule[q, k].Value));
+                }
+                s1.week.Add(s2);
+            }
+            */
+            
+            DataTable dataTableScheduleUser = new DataTable(loginUser);
+            dataTableScheduleUser.Columns.Add("dataGridViewTextBoxColumn11");
+            dataTableScheduleUser.Columns.Add("dataGridViewTextBoxColumn12");
+            dataTableScheduleUser.Columns.Add("dataGridViewTextBoxColumn13");
+            dataTableScheduleUser.Columns.Add("dataGridViewTextBoxColumn14");
+            dataTableScheduleUser.Columns.Add("dataGridViewTextBoxColumn15");
+            dataTableScheduleUser.Columns.Add("dataGridViewTextBoxColumn16");
+
+            //scheduleUser[loginUser] = dataTableScheduleUser;
+
+            MessageBox.Show("Сохранение прошло успешно!");
         }
         public void FillGrid2()
         {
@@ -102,33 +148,6 @@ namespace TRPO
             dataGridView2.Columns[1].Width = 103;
             // отмена добавления последней строчки в таблице dataGridView2
             dataGridView2.AllowUserToAddRows = false;
-        }
-        private void ButtonSave_Click(object sender, EventArgs e)
-        {
-            Week s1 = new Week(new List<Day>());
-            for (q = 0; q < Week.dayCount; q++)
-            {
-                Day s2 = new Day(new List<string>());
-                for (k = 0; k < Day.lessonCount; k++)
-                {
-                    s2.day.Add(Convert.ToString(gridSchedule[q, k].Value));
-                    //scheduleUser[loginUser].week[q].day[k] = Convert.ToString(gridSchedule[q, k].Value);
-                }
-                s1.week.Add(s2);
-            }
-            /*
-            for (q = Week.dayCount - 1; q > -1; q--)
-            {
-                for (k = Day.lessonCount - 1; k > -1; k--)
-                {
-                    s2.day.Add(Convert.ToString(gridSchedule[q, k].Value));
-                }
-                s1.week.Add(s2);
-            }
-            */
-            scheduleUser[loginUser] = s1;
-            DataRepository.WriteFileSchedule(scheduleUser);
-            MessageBox.Show("Сохранение прошло успешно!");
         }
     }
 }

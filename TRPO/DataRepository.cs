@@ -5,8 +5,9 @@ using System.Text;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
-using System.Xml.Serialization;
 using System.Threading.Tasks;
+using System.Data;
+using Newtonsoft.Json;
 
 namespace TRPO
 {
@@ -56,51 +57,10 @@ namespace TRPO
             }
             return newUserProf;
         }
-        public static Dictionary<string, Week> ReadFileSchedule()
+        public static DataTable ReadTableScheduleUser (string log)
         {
-            Dictionary<string, Week> schedule = new Dictionary<string, Week>();
-            DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(Dictionary<string, Week>));
-            using (FileStream fs = new FileStream("ScheduleJSON.json", FileMode.OpenOrCreate))
-            {
-                if (fs.Length > 0)
-                    schedule = (Dictionary<string, Week>)jsonFormatter.ReadObject(fs);
-                else
-                    schedule = new Dictionary<string, Week>();
-            }
-            return schedule;
-        }
-        public static Dictionary<string, Week> WriteFileSchedule(Dictionary<string, Week> newSchedule)
-        {
-            DataContractJsonSerializer jsonFormatterUser = new DataContractJsonSerializer(typeof(Dictionary<string, Week>));
-            using (FileStream fs = new FileStream("ScheduleJSON.json", FileMode.OpenOrCreate))
-            {
-                jsonFormatterUser.WriteObject(fs, newSchedule);
-            }
-            return newSchedule;
-        }
-        public static Dictionary<string, Week> ReadFileScheduleXML()
-        {
-            
-            Dictionary<string, Week> schedule = new Dictionary<string, Week>();
-            var x1 = new DataContractSerializer(typeof(Dictionary<string, Week>)); 
-            using (FileStream fs = new FileStream("ScheduleXML.xml", FileMode.OpenOrCreate))
-            {
-                if (fs.Length > 0)
-                    schedule = (Dictionary<string, Week>)x1.ReadObject(fs);
-                else
-                    schedule = new Dictionary<string, Week>();
-            }
-            
-            return schedule;
-        }
-        public static Dictionary<string, Week> WriteFileScheduleXML(Dictionary<string, Week> newSchedule)
-        {
-            var x1 = new DataContractSerializer(typeof(Dictionary<string, Week>));
-            using (FileStream fs = new FileStream("ScheduleXML.xml", FileMode.OpenOrCreate))
-            {
-                x1.WriteObject(fs, newSchedule);
-            }
-            return newSchedule;
+            DataTable dt = new DataTable();
+            return dt;
         }
     }
 }
