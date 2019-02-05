@@ -48,11 +48,11 @@
             this.ButtonSave.BackColor = System.Drawing.Color.White;
             this.ButtonSave.Cursor = System.Windows.Forms.Cursors.Hand;
             this.ButtonSave.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.ButtonSave.Location = new System.Drawing.Point(453, 274);
+            this.ButtonSave.Location = new System.Drawing.Point(442, 270);
             this.ButtonSave.Name = "ButtonSave";
-            this.ButtonSave.Size = new System.Drawing.Size(37, 23);
+            this.ButtonSave.Size = new System.Drawing.Size(70, 23);
             this.ButtonSave.TabIndex = 2;
-            this.ButtonSave.Text = "ОК";
+            this.ButtonSave.Text = "Сохранить";
             this.ButtonSave.UseVisualStyleBackColor = true;
             this.ButtonSave.Click += new System.EventHandler(this.ButtonSave_Click);
             // 
@@ -72,6 +72,7 @@
             // 
             // LoginTextBox
             // 
+            this.LoginTextBox.Enabled = false;
             this.LoginTextBox.Location = new System.Drawing.Point(376, 218);
             this.LoginTextBox.Name = "LoginTextBox";
             this.LoginTextBox.Size = new System.Drawing.Size(200, 20);

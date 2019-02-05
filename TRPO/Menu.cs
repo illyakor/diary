@@ -5,7 +5,6 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.IO;
 using System.Windows.Forms;
 
 namespace TRPO
@@ -38,17 +37,23 @@ namespace TRPO
         }
         private void LabelEvents_Click(object sender, EventArgs e)
         {
-            var eventsForm = new Events() { MdiParent = this };
-            eventsForm.Show();
+            //var eventsForm = new Events() { MdiParent = this };
+            //eventsForm.Show();
         }
         private void LabelAditionalInf_Click(object sender, EventArgs e)
         {
-            var addform = new AIForm() { MdiParent = this };
-            addform.Show();
+            //var addform = new AIForm() { MdiParent = this };
+            //addform.Show();
         }
         private void ButtonDeleteAccount_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Эта функция не реализована");
+            DeleteProfUser(sender);
+            MessageBox.Show("Эта функция реализована не польностью");
+        }
+        private void DeleteProfUser(object sender)
+        {
+            Dictionary<string, User> userProf = DataRepository.ReadProf();
+            DataRepository.WriteProf(userProf, sender);
         }
         private void Label_MouseEnter(object sender, EventArgs e)
         {

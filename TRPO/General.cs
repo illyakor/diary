@@ -6,13 +6,13 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-
+    
 namespace TRPO
 {
     public partial class General : Form
     {
         private static General general;
-        public static string newLoginUser, loginUser;
+        public static string loginUser;
         private General()
         {
             InitializeComponent();
@@ -20,7 +20,10 @@ namespace TRPO
         public static General GetGeneral()
         {
             if (general == null)
+            {
                 general = new General();
+                CreateTableMYsql();
+            }
             return general;
         }
         private void ButtonInput_Click(object sender, EventArgs e)
@@ -35,9 +38,15 @@ namespace TRPO
         {
             MessageBox.Show("Эта функция не реализована");
         }
+        private static void CreateTableMYsql()
+        {
+            RepositoryCreateTableMySQL.CreateTableProf();
+            RepositoryCreateTableMySQL.CreateTableTeacherAndClasses();
+            RepositoryCreateTableMySQL.CreateTableAdditionalInformation();
+        }
         private void CheckUser()
         {
-            Dictionary<string, string> users = DataRepository.ReadFileUser();
+            Dictionary<string, string> users = DataRepository.ReadUser();
             if (users != null && users.ContainsKey(textBoxLogin.Text) && users[textBoxLogin.Text] == textBoxPassword.Text)
             {
                 OpenMenuForm();
@@ -50,7 +59,6 @@ namespace TRPO
         private void OpenMenuForm()
         {
             loginUser = textBoxLogin.Text;
-            newLoginUser = textBoxLogin.Text;
             this.Hide();
             Menu menuForm = new Menu();
             textBoxLogin.Text = "";
@@ -60,7 +68,7 @@ namespace TRPO
         private void OpenRegistrationForm()
         {
             this.Hide();
-            Registration regForm = new Registration(textBoxName.Text, textBoxSurname.Text, dateTimePickerBirthdate.Value);
+            Registration regForm = new Registration(textBoxName.Text, textBoxSurname.Text, dateTimePickerBirthDate.Value);
             regForm.Show();
         }
         private void General_FormClosed(object sender, FormClosedEventArgs e)

@@ -5,7 +5,6 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.IO;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 
@@ -17,10 +16,11 @@ namespace TRPO
         // глобальные перменные
         DataTable scheduleUser;
         int k = 0, count = 0, q = 0;
+        public static int lessonCount = 8, dayCount = 6;
         // создание массива расписания факультативов
         string[,,] schedule2 = new string[8, 2, 10];
         // список предметов
-        string[] classes = { " ", "бел. язык", "бел. лит.", "русск. язык", "русск. лит.", "англ. язык", "немецк. язык", "математика", "информат.", "чел. и мир", "ист. Беларуси", "мировая ист.", "общствед.", "география", "биология", "физика", "астрономия", "химия", "труд. обуч.", "черчение", "физ. к. и зд.", "ДПЮ", "мед. подгот.", "ОБЖ", "Мастацтва"};
+        public static string[] teacher = { " ", "бел. язык", "бел. лит.", "русск. язык", "русск. лит.", "англ. язык", "немецк. язык", "математика", "информат.", "чел. и мир", "ист. Беларуси", "мировая ист.", "общствед.", "география", "биология", "физика", "астрономия", "химия", "труд. обуч.", "черчение", "физ. к. и зд.", "ДПЮ", "мед. подгот.", "ОБЖ", "Мастацтва"};
         // список дней недели
         string[] days = { " ", "понедельник", "вторник", "среда", "четверг", "пятница", "суббота" };
         // массив расписания звонков
@@ -36,14 +36,14 @@ namespace TRPO
         public void FillGridSchedule()
         {
             // заполнение заголовок строк
-            for (q = 0; q < Day.lessonCount; q++) gridSchedule.Rows[q].HeaderCell.Value = numberAndCall[q];
+            for (q = 0; q < lessonCount; q++) gridSchedule.Rows[q].HeaderCell.Value = numberAndCall[q];
             // внесение списка предметов в выбор для редактирования
-            this.dataGridViewTextBoxColumn11.Items.AddRange(classes);
-            this.dataGridViewTextBoxColumn12.Items.AddRange(classes);
-            this.dataGridViewTextBoxColumn13.Items.AddRange(classes);
-            this.dataGridViewTextBoxColumn14.Items.AddRange(classes);
-            this.dataGridViewTextBoxColumn15.Items.AddRange(classes);
-            this.dataGridViewTextBoxColumn16.Items.AddRange(classes);
+            this.dataGridViewTextBoxColumn11.Items.AddRange(teacher);
+            this.dataGridViewTextBoxColumn12.Items.AddRange(teacher);
+            this.dataGridViewTextBoxColumn13.Items.AddRange(teacher);
+            this.dataGridViewTextBoxColumn14.Items.AddRange(teacher);
+            this.dataGridViewTextBoxColumn15.Items.AddRange(teacher);
+            this.dataGridViewTextBoxColumn16.Items.AddRange(teacher);
             //
             string cmdMysql = "SHOW TABLES;";
             MySqlConnection mySqlConn = new MySqlConnection(connect);
@@ -68,9 +68,9 @@ namespace TRPO
             gridSchedule.DataSource = scheduleUser;
 
             // цикл заполнения таблицы dataGridView1 соответствующим расписанием предметов
-            for (k = 0; k < Week.dayCount; k++)
+            for (k = 0; k < dayCount; k++)
             {
-                for (q = 0; q < Day.lessonCount; q++)
+                for (q = 0; q < lessonCount; q++)
                 {
                     // вывод предмета соответствующего с расписанием занятий
                     gridSchedule.Rows[q].Cells[k].Value = " ";
@@ -81,10 +81,10 @@ namespace TRPO
         {
             /*
             Week s1 = new Week(new List<Day>());
-            for (q = 0; q < Week.dayCount; q++)
+            for (q = 0; q < dayCount; q++)
             {
                 Day s2 = new Day(new List<string>());
-                for (k = 0; k < Day.lessonCount; k++)
+                for (k = 0; k < lessonCount; k++)
                 {
                     s2.day.Add(Convert.ToString(gridSchedule[q, k].Value));
                     //scheduleUser[loginUser].week[q].day[k] = Convert.ToString(gridSchedule[q, k].Value);
@@ -92,9 +92,9 @@ namespace TRPO
                 s1.week.Add(s2);
             }
             
-            for (q = Week.dayCount - 1; q > -1; q--)
+            for (q = dayCount - 1; q > -1; q--)
             {
-                for (k = Day.lessonCount - 1; k > -1; k--)
+                for (k = lessonCount - 1; k > -1; k--)
                 {
                     s2.day.Add(Convert.ToString(gridSchedule[q, k].Value));
                 }
@@ -117,9 +117,9 @@ namespace TRPO
         public void FillGrid2()
         {
             // количество строк в dataGridView2
-            this.dataGridView2.RowCount = Day.lessonCount + 1;
+            this.dataGridView2.RowCount = lessonCount + 1;
             // цикл заполнения таблицы dataGridView2 для дней недели
-            for (k = 0; k < Day.lessonCount; k++)
+            for (k = 0; k < lessonCount; k++)
             {
                 // изменение свойства ячейки из textBox в comboBox
                 DataGridViewComboBoxCell cell = new DataGridViewComboBoxCell();
@@ -131,12 +131,12 @@ namespace TRPO
                 dataGridView2.Rows[k].Cells[0] = cell;
             }
             // цикл заполнения таблицы dataGridView2 для предметов
-            for (k = 0; k < Day.lessonCount; k++)
+            for (k = 0; k < lessonCount; k++)
             {
                 // изменение свойства ячейки из textBox в comboBox
                 DataGridViewComboBoxCell cell = new DataGridViewComboBoxCell();
                 // внесение списка предметов в выбор для редактирования
-                cell.Items.AddRange(classes);
+                cell.Items.AddRange(teacher);
                 // внесение предмета соответствующего профиля из массива расписания факультативов
                 cell.Value = schedule2[k, 1, count];
                 // вывод списка предметов и предмета соответствующего с расписанием факультативов

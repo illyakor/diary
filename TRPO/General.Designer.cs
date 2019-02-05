@@ -41,7 +41,7 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
-            this.dateTimePickerBirthdate = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePickerBirthDate = new System.Windows.Forms.DateTimePicker();
             this.label7 = new System.Windows.Forms.Label();
             this.textBoxSurname = new System.Windows.Forms.TextBox();
             this.textBoxName = new System.Windows.Forms.TextBox();
@@ -167,7 +167,7 @@
             // 
             this.panel4.BackColor = System.Drawing.Color.White;
             this.panel4.Controls.Add(this.label8);
-            this.panel4.Controls.Add(this.dateTimePickerBirthdate);
+            this.panel4.Controls.Add(this.dateTimePickerBirthDate);
             this.panel4.Controls.Add(this.label7);
             this.panel4.Controls.Add(this.textBoxSurname);
             this.panel4.Controls.Add(this.textBoxName);
@@ -186,22 +186,22 @@
             this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.label8.Location = new System.Drawing.Point(170, 95);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(104, 13);
+            this.label8.Size = new System.Drawing.Size(101, 13);
             this.label8.TabIndex = 19;
             this.label8.Text = "День/Месяц/Год : ";
             // 
-            // dateTimePickerBirthdate
+            // dateTimePickerBirthDate
             // 
-            this.dateTimePickerBirthdate.CalendarForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.dateTimePickerBirthdate.CalendarMonthBackground = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.dateTimePickerBirthdate.CalendarTitleBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.dateTimePickerBirthdate.CalendarTitleForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.dateTimePickerBirthdate.CalendarTrailingForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.dateTimePickerBirthdate.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.dateTimePickerBirthdate.Location = new System.Drawing.Point(125, 111);
-            this.dateTimePickerBirthdate.Name = "dateTimePickerBirthdate";
-            this.dateTimePickerBirthdate.Size = new System.Drawing.Size(251, 20);
-            this.dateTimePickerBirthdate.TabIndex = 21;
+            this.dateTimePickerBirthDate.CalendarForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.dateTimePickerBirthDate.CalendarMonthBackground = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.dateTimePickerBirthDate.CalendarTitleBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.dateTimePickerBirthDate.CalendarTitleForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.dateTimePickerBirthDate.CalendarTrailingForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.dateTimePickerBirthDate.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.dateTimePickerBirthDate.Location = new System.Drawing.Point(125, 111);
+            this.dateTimePickerBirthDate.Name = "dateTimePickerBirthDate";
+            this.dateTimePickerBirthDate.Size = new System.Drawing.Size(251, 20);
+            this.dateTimePickerBirthDate.TabIndex = 21;
             // 
             // label7
             // 
@@ -285,6 +285,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(941, 478);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
@@ -326,7 +327,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button buttonRegistration;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.DateTimePicker dateTimePickerBirthdate;
+        private System.Windows.Forms.DateTimePicker dateTimePickerBirthDate;
     }
 }
 

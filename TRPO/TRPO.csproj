@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
@@ -10,9 +10,11 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TRPO</RootNamespace>
     <AssemblyName>TRPO</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -25,7 +27,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -38,6 +39,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -47,6 +49,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>
@@ -71,81 +74,82 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataRepository.cs" />
-    <Compile Include="Day.cs" />
-    <Compile Include="InputProtection.cs" />
-    <Compile Include="User.cs" />
-    <Compile Include="TeachersAndClasses.cs">
+    <Compile Include="MySQL\DBMySQLUtils.cs" />
+    <Compile Include="MySQL\DBUtils.cs" />
+    <Compile Include="folderBuff\DataRepository.cs" />
+    <Compile Include="folderBuff\InputProtection.cs" />
+    <Compile Include="folderForMenu\TeachersAndClasses.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TeachersAndClasses.Designer.cs">
+    <Compile Include="folderForMenu\TeachersAndClasses.Designer.cs">
       <DependentUpon>TeachersAndClasses.cs</DependentUpon>
     </Compile>
-    <Compile Include="Events.cs">
+    <Compile Include="folderForMenu\Events.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Events.Designer.cs">
+    <Compile Include="folderForMenu\Events.Designer.cs">
       <DependentUpon>Events.cs</DependentUpon>
     </Compile>
-    <Compile Include="AdditionalInf.cs">
+    <Compile Include="folderForMenu\AdditionalInf.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AdditionalInf.Designer.cs">
+    <Compile Include="folderForMenu\AdditionalInf.Designer.cs">
       <DependentUpon>AdditionalInf.cs</DependentUpon>
     </Compile>
-    <Compile Include="Schedule.cs">
+    <Compile Include="folderForMenu\Schedule.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Schedule.Designer.cs">
+    <Compile Include="folderForMenu\Schedule.Designer.cs">
       <DependentUpon>Schedule.cs</DependentUpon>
     </Compile>
-    <Compile Include="ShoolProfInf.cs">
+    <Compile Include="folderForMenu\ShoolProfInf.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ShoolProfInf.Designer.cs">
+    <Compile Include="folderForMenu\ShoolProfInf.Designer.cs">
       <DependentUpon>ShoolProfInf.cs</DependentUpon>
     </Compile>
-    <Compile Include="0General.cs">
+    <Compile Include="General.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="0General.Designer.cs">
-      <DependentUpon>0General.cs</DependentUpon>
+    <Compile Include="General.Designer.cs">
+      <DependentUpon>General.cs</DependentUpon>
     </Compile>
-    <Compile Include="0Registration.cs">
+    <Compile Include="Menu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="0Registration.Designer.cs">
-      <DependentUpon>0Registration.cs</DependentUpon>
+    <Compile Include="Menu.Designer.cs">
+      <DependentUpon>Menu.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="0Menu.cs">
+    <Compile Include="Registration.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="0Menu.Designer.cs">
-      <DependentUpon>0Menu.cs</DependentUpon>
+    <Compile Include="Registration.Designer.cs">
+      <DependentUpon>Registration.cs</DependentUpon>
     </Compile>
-    <Compile Include="Week.cs" />
-    <EmbeddedResource Include="TeachersAndClasses.resx">
+    <Compile Include="folderBuff\User.cs" />
+    <Compile Include="MySQL\RepositoryCreateTableMySQL.cs" />
+    <EmbeddedResource Include="folderForMenu\TeachersAndClasses.resx">
       <DependentUpon>TeachersAndClasses.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Events.resx">
+    <EmbeddedResource Include="folderForMenu\Events.resx">
       <DependentUpon>Events.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AdditionalInf.resx">
+    <EmbeddedResource Include="folderForMenu\AdditionalInf.resx">
       <DependentUpon>AdditionalInf.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Schedule.resx">
+    <EmbeddedResource Include="folderForMenu\Schedule.resx">
       <DependentUpon>Schedule.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ShoolProfInf.resx">
+    <EmbeddedResource Include="folderForMenu\ShoolProfInf.resx">
       <DependentUpon>ShoolProfInf.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="0General.resx">
-      <DependentUpon>0General.cs</DependentUpon>
+    <EmbeddedResource Include="General.resx">
+      <DependentUpon>General.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="0Registration.resx">
-      <DependentUpon>0Registration.cs</DependentUpon>
+    <EmbeddedResource Include="Menu.resx">
+      <DependentUpon>Menu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -157,9 +161,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="0Menu.resx">
-      <DependentUpon>0Menu.cs</DependentUpon>
+    <EmbeddedResource Include="Registration.resx">
+      <DependentUpon>Registration.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -192,6 +197,7 @@
   <ItemGroup>
     <None Include="Resources\7RQq.gif" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
