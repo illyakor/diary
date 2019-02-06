@@ -76,36 +76,36 @@
   <ItemGroup>
     <Compile Include="MySQL\DBMySQLUtils.cs" />
     <Compile Include="MySQL\DBUtils.cs" />
-    <Compile Include="folderBuff\DataRepository.cs" />
-    <Compile Include="folderBuff\InputProtection.cs" />
-    <Compile Include="folderForMenu\TeachersAndClasses.cs">
+    <Compile Include="DataRepository\DataRepositoryProf.cs" />
+    <Compile Include="DataRepository\InputProtection.cs" />
+    <Compile Include="MenuFunction\TeachersAndClasses.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="folderForMenu\TeachersAndClasses.Designer.cs">
+    <Compile Include="MenuFunction\TeachersAndClasses.Designer.cs">
       <DependentUpon>TeachersAndClasses.cs</DependentUpon>
     </Compile>
-    <Compile Include="folderForMenu\Events.cs">
+    <Compile Include="MenuFunction\Events.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="folderForMenu\Events.Designer.cs">
+    <Compile Include="MenuFunction\Events.Designer.cs">
       <DependentUpon>Events.cs</DependentUpon>
     </Compile>
-    <Compile Include="folderForMenu\AdditionalInf.cs">
+    <Compile Include="MenuFunction\AdditionalInf.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="folderForMenu\AdditionalInf.Designer.cs">
+    <Compile Include="MenuFunction\AdditionalInf.Designer.cs">
       <DependentUpon>AdditionalInf.cs</DependentUpon>
     </Compile>
-    <Compile Include="folderForMenu\Schedule.cs">
+    <Compile Include="MenuFunction\Schedule.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="folderForMenu\Schedule.Designer.cs">
+    <Compile Include="MenuFunction\Schedule.Designer.cs">
       <DependentUpon>Schedule.cs</DependentUpon>
     </Compile>
-    <Compile Include="folderForMenu\ShoolProfInf.cs">
+    <Compile Include="MenuFunction\ShoolProfInf.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="folderForMenu\ShoolProfInf.Designer.cs">
+    <Compile Include="MenuFunction\ShoolProfInf.Designer.cs">
       <DependentUpon>ShoolProfInf.cs</DependentUpon>
     </Compile>
     <Compile Include="General.cs">
@@ -128,21 +128,21 @@
     <Compile Include="Registration.Designer.cs">
       <DependentUpon>Registration.cs</DependentUpon>
     </Compile>
-    <Compile Include="folderBuff\User.cs" />
+    <Compile Include="DataRepository\User.cs" />
     <Compile Include="MySQL\RepositoryCreateTableMySQL.cs" />
-    <EmbeddedResource Include="folderForMenu\TeachersAndClasses.resx">
+    <EmbeddedResource Include="MenuFunction\TeachersAndClasses.resx">
       <DependentUpon>TeachersAndClasses.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="folderForMenu\Events.resx">
+    <EmbeddedResource Include="MenuFunction\Events.resx">
       <DependentUpon>Events.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="folderForMenu\AdditionalInf.resx">
+    <EmbeddedResource Include="MenuFunction\AdditionalInf.resx">
       <DependentUpon>AdditionalInf.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="folderForMenu\Schedule.resx">
+    <EmbeddedResource Include="MenuFunction\Schedule.resx">
       <DependentUpon>Schedule.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="folderForMenu\ShoolProfInf.resx">
+    <EmbeddedResource Include="MenuFunction\ShoolProfInf.resx">
       <DependentUpon>ShoolProfInf.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="General.resx">

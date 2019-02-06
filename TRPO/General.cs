@@ -61,7 +61,6 @@ namespace TRPO
             loginUser = textBoxLogin.Text;
             this.Hide();
             Menu menuForm = new Menu();
-            textBoxLogin.Text = "";
             textBoxPassword.Text = "";
             menuForm.Show();
         }
