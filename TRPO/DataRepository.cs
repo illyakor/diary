@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Json;
 using System.Threading.Tasks;
 using System.Data;
 using Newtonsoft.Json;
@@ -16,11 +14,13 @@ namespace TRPO
         public static Dictionary<string, string> ReadFileUser()
         {
             Dictionary<string, string> users = new Dictionary<string, string>();
-            DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(Dictionary<string, string>));
             using (FileStream fs = new FileStream("Users.json", FileMode.OpenOrCreate))
             {
                 if (fs.Length > 0)
-                    users = (Dictionary<string, string>)jsonFormatter.ReadObject(fs);
+                {
+                    string message = fs.ToString();
+                    users = JsonConvert.DeserializeObject<Dictionary<string, string>>(message);
+                }
                 else
                     users = new Dictionary<string, string>();
             }
@@ -29,11 +29,13 @@ namespace TRPO
         public static Dictionary<string, User> ReadFileProf()
         {
             Dictionary<string, User> usersProf = new Dictionary<string, User>();
-            DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(Dictionary<string, User>));
             using (FileStream fs = new FileStream("ProfFile.json", FileMode.OpenOrCreate))
             {
                 if (fs.Length > 0)
-                    usersProf = (Dictionary<string, User>)jsonFormatter.ReadObject(fs);
+                {
+                    string message = fs.ToString();
+                    usersProf = JsonConvert.DeserializeObject<Dictionary<string, User>>(message);
+                }
                 else
                     usersProf = new Dictionary<string, User>();
             }
