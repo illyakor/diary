@@ -6,11 +6,14 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Newtonsoft.Json;
 
 namespace TRPO
 {
     public partial class Registration : Form
     {
+        string message = "message";
+        Dictionary<string, List<string>> newUserProf = new Dictionary<string, List<string>>();
         public Registration(string textbox1, string textbox2, DateTime datetimepicker1)
         {
             InitializeComponent();
@@ -18,17 +21,45 @@ namespace TRPO
             NameTextBox.Text = textbox2;
             dateTimePicker1.Value = datetimepicker1;
         }
+        private Dictionary<string, List<string>> GetProf()
+        {
+            try
+            {
+                message = JsonConvert.SerializeObject(newUserProf);
+                Client.SendMessageFromSocket(11000, message);
+                newUserProf = JsonConvert.DeserializeObject<Dictionary<string, List<string>>>(Client.msgg);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+                newUserProf = new Dictionary<string, List<string>>();
+            }
+            return newUserProf;
+        }
+        private void SetProf(Dictionary<string, List<string>> prof)
+        {
+            try
+            {
+                message = JsonConvert.SerializeObject(prof);
+                Client.SendMessageFromSocket(11000, message);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
         private void ButtonRegistration(object sender, EventArgs e)
         {
             if (AllFieldsValid())
             {
-                Dictionary<string, User> newUserProf = new Dictionary<string, User>
+                newUserProf = GetProf();
+                List<string> Prof = new List<string>()
                 {
-                    [LoginTextBox.Text] = new User(LastNameTextBox.Text, NameTextBox.Text, PatronymicTextBox.Text, dateTimePicker1.Text, LoginTextBox.Text, PasswordTextBox.Text)
+                    LastNameTextBox.Text, NameTextBox.Text, PatronymicTextBox.Text, dateTimePicker1.Text, LoginTextBox.Text, PasswordTextBox.Text
                 };
+                newUserProf[LoginTextBox.Text] = Prof;
+                SetProf(newUserProf);
                 General.loginUser = LoginTextBox.Text;
-                DataRepository.WriteProf(newUserProf, sender);
-
                 MessageBox.Show(@"Вы успешно зарегистрированы!");
             }
             else MessageBox.Show(@"Заполнение всех полей обязательно!");

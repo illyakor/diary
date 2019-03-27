@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Newtonsoft.Json;
     
 namespace TRPO
 {
@@ -13,16 +14,31 @@ namespace TRPO
     {
         private static General general;
         public static string loginUser;
+        static Dictionary<string, string> users = new Dictionary<string, string>();
         private General()
         {
             InitializeComponent();
+        }
+        private Dictionary<string, string> GetUser()
+        {
+            try
+            {
+                string message = JsonConvert.SerializeObject(users);
+                Client.SendMessageFromSocket(11000, message);
+                users = JsonConvert.DeserializeObject<Dictionary<string, string>>(Client.msgg);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+                users = new Dictionary<string, string>();
+            }
+            return users;
         }
         public static General GetGeneral()
         {
             if (general == null)
             {
                 general = new General();
-                CreateTableMYsql();
             }
             return general;
         }
@@ -38,15 +54,9 @@ namespace TRPO
         {
             MessageBox.Show("Эта функция не реализована");
         }
-        private static void CreateTableMYsql()
-        {
-            RepositoryCreateTableMySQL.CreateTableProf();
-            RepositoryCreateTableMySQL.CreateTableTeacherAndClasses();
-            RepositoryCreateTableMySQL.CreateTableAdditionalInformation();
-        }
         private void CheckUser()
         {
-            Dictionary<string, string> users = DataRepository.ReadUser();
+            users = GetUser();
             if (users != null && users.ContainsKey(textBoxLogin.Text) && users[textBoxLogin.Text] == textBoxPassword.Text)
             {
                 OpenMenuForm();
@@ -85,6 +95,3 @@ namespace TRPO
         }
     }
 }
-//System.Environment.FailFast("Палундра!");
-//Process.GetCurrentProcess().Kill();
-//Application.Exit();

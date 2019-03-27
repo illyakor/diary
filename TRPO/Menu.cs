@@ -52,8 +52,8 @@ namespace TRPO
         }
         private void DeleteProfUser(object sender)
         {
-            Dictionary<string, User> userProf = DataRepository.ReadProf();
-            DataRepository.WriteProf(userProf, sender);
+            //Dictionary<string, List<string>> userProf = DataRepository.ReadProf();
+            //DataRepository.WriteProf(userProf, sender);
         }
         private void Label_MouseEnter(object sender, EventArgs e)
         {
