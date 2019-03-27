@@ -81,8 +81,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataRepository\Client.cs" />
-    <Compile Include="MySQL\DBMySQLUtils.cs" />
-    <Compile Include="MySQL\DBUtils.cs" />
     <Compile Include="DataRepository\InputProtection.cs" />
     <Compile Include="MenuFunction\TeachersAndClasses.cs">
       <SubType>Form</SubType>
@@ -134,7 +132,6 @@
     <Compile Include="Registration.Designer.cs">
       <DependentUpon>Registration.cs</DependentUpon>
     </Compile>
-    <Compile Include="MySQL\RepositoryCreateTableMySQL.cs" />
     <EmbeddedResource Include="MenuFunction\TeachersAndClasses.resx">
       <DependentUpon>TeachersAndClasses.cs</DependentUpon>
     </EmbeddedResource>
