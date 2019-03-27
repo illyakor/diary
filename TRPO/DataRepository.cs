@@ -43,20 +43,20 @@ namespace TRPO
         }
         public static Dictionary<string, string> WriteFileUser(Dictionary<string, string> newUsers)
         {
-            DataContractJsonSerializer jsonFormatterUser = new DataContractJsonSerializer(typeof(Dictionary<string, string>));
-            using (FileStream fs = new FileStream("Users.json", FileMode.OpenOrCreate))
-            {
-                jsonFormatterUser.WriteObject(fs, newUsers);
-            }
+            //DataContractJsonSerializer jsonFormatterUser = new DataContractJsonSerializer(typeof(Dictionary<string, string>));
+            //using (FileStream fs = new FileStream("Users.json", FileMode.OpenOrCreate))
+            //{
+            //    jsonFormatterUser.WriteObject(fs, newUsers);
+            //}
             return newUsers;
         }
         public static Dictionary<string, User> WriteFileProf(Dictionary<string, User> newUserProf)
         {
-            DataContractJsonSerializer jsonFormatterUser = new DataContractJsonSerializer(typeof(Dictionary<string, User>));
-            using (FileStream fs = new FileStream("ProfFile.json", FileMode.OpenOrCreate))
-            {
-                jsonFormatterUser.WriteObject(fs, newUserProf);
-            }
+            //DataContractJsonSerializer jsonFormatterUser = new DataContractJsonSerializer(typeof(Dictionary<string, User>));
+            //using (FileStream fs = new FileStream("ProfFile.json", FileMode.OpenOrCreate))
+            //{
+            //    jsonFormatterUser.WriteObject(fs, newUserProf);
+            //}
             return newUserProf;
         }
         public static DataTable ReadTableScheduleUser (string log)
