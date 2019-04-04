@@ -12,7 +12,6 @@ namespace TRPO
 {
     public partial class Registration : Form
     {
-        string message = "message";
         Dictionary<string, List<string>> newUserProf = new Dictionary<string, List<string>>();
         public Registration(string textbox1, string textbox2, DateTime datetimepicker1)
         {
@@ -25,8 +24,7 @@ namespace TRPO
         {
             try
             {
-                message = JsonConvert.SerializeObject(newUserProf);
-                Client.SendMessageFromSocket(11000, message);
+                Client.SendMessageFromSocket(11000, JsonConvert.SerializeObject(newUserProf) + "|read");
                 newUserProf = JsonConvert.DeserializeObject<Dictionary<string, List<string>>>(Client.msgg);
             }
             catch (Exception ex)
@@ -36,12 +34,11 @@ namespace TRPO
             }
             return newUserProf;
         }
-        private void SetProf(Dictionary<string, List<string>> prof)
+        private void SetProf(Dictionary<string, List<string>> prof, object sender)
         {
             try
             {
-                message = JsonConvert.SerializeObject(prof);
-                Client.SendMessageFromSocket(11000, message);
+                Client.SendMessageFromSocket(11000, JsonConvert.SerializeObject(prof));
             }
             catch (Exception ex)
             {
@@ -58,7 +55,7 @@ namespace TRPO
                     LastNameTextBox.Text, NameTextBox.Text, PatronymicTextBox.Text, dateTimePicker1.Text, LoginTextBox.Text, PasswordTextBox.Text
                 };
                 newUserProf[LoginTextBox.Text] = Prof;
-                SetProf(newUserProf);
+                SetProf(newUserProf, sender);
                 General.loginUser = LoginTextBox.Text;
                 MessageBox.Show(@"Вы успешно зарегистрированы!");
             }

@@ -12,7 +12,6 @@ namespace TRPO
 {
     public partial class ShoolProfInf : Form
     {
-        string message = "message";
         Dictionary<string, List<string>> newUserProf = new Dictionary<string, List<string>>();
         List<string> Prof;
         public ShoolProfInf()
@@ -35,8 +34,7 @@ namespace TRPO
         {
             try
             {
-                message = JsonConvert.SerializeObject(newUserProf);
-                Client.SendMessageFromSocket(11000, message);
+                Client.SendMessageFromSocket(11000, JsonConvert.SerializeObject(newUserProf) + "|read");
                 newUserProf = JsonConvert.DeserializeObject<Dictionary<string, List<string>>>(Client.msgg);
             }
             catch (Exception ex)
@@ -46,12 +44,11 @@ namespace TRPO
             }
             return newUserProf;
         }
-        private void SetProf(Dictionary<string, List<string>> prof)
+        private void SetProf(Dictionary<string, List<string>> prof, object sender)
         {
             try
             {
-                message = JsonConvert.SerializeObject(prof);
-                Client.SendMessageFromSocket(11000, message);
+                Client.SendMessageFromSocket(11000, JsonConvert.SerializeObject(prof));
             }
             catch (Exception ex)
             {
@@ -67,7 +64,7 @@ namespace TRPO
                     LastNameTextBox.Text, NameTextBox.Text, PatronymicTextBox.Text, dateTimePicker1.Text, LoginTextBox.Text, PasswordTextBox.Text
                 };
                 newUserProf[General.loginUser] = Prof;
-                SetProf(newUserProf);
+                SetProf(newUserProf, sender);
                 MessageBox.Show("Сохранение прошло успешно!");
             }
             else MessageBox.Show(@"Заполнение всех полей обязательно!");

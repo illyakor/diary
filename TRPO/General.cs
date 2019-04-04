@@ -23,8 +23,7 @@ namespace TRPO
         {
             try
             {
-                string message = JsonConvert.SerializeObject(users);
-                Client.SendMessageFromSocket(11000, message);
+                Client.SendMessageFromSocket(11000, JsonConvert.SerializeObject(users) + "|read");
                 users = JsonConvert.DeserializeObject<Dictionary<string, string>>(Client.msgg);
             }
             catch (Exception ex)
