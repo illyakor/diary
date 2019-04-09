@@ -82,6 +82,7 @@
   <ItemGroup>
     <Compile Include="DataRepository\Client.cs" />
     <Compile Include="DataRepository\InputProtection.cs" />
+    <Compile Include="DataRepository\GetSet.cs" />
     <Compile Include="MenuFunction\TeachersAndClasses.cs">
       <SubType>Form</SubType>
     </Compile>

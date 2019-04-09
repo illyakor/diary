@@ -20,42 +20,17 @@ namespace TRPO
             NameTextBox.Text = textbox2;
             dateTimePicker1.Value = datetimepicker1;
         }
-        private Dictionary<string, List<string>> GetProf()
-        {
-            try
-            {
-                Client.SendMessageFromSocket(11000, JsonConvert.SerializeObject(newUserProf) + "|read");
-                newUserProf = JsonConvert.DeserializeObject<Dictionary<string, List<string>>>(Client.msgg);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-                newUserProf = new Dictionary<string, List<string>>();
-            }
-            return newUserProf;
-        }
-        private void SetProf(Dictionary<string, List<string>> prof, object sender)
-        {
-            try
-            {
-                Client.SendMessageFromSocket(11000, JsonConvert.SerializeObject(prof));
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-        }
         private void ButtonRegistration(object sender, EventArgs e)
         {
             if (AllFieldsValid())
             {
-                newUserProf = GetProf();
+                newUserProf = JsonConvert.DeserializeObject<Dictionary<string, List<string>>>(GetSet.Get(newUserProf));
                 List<string> Prof = new List<string>()
                 {
                     LastNameTextBox.Text, NameTextBox.Text, PatronymicTextBox.Text, dateTimePicker1.Text, LoginTextBox.Text, PasswordTextBox.Text
                 };
                 newUserProf[LoginTextBox.Text] = Prof;
-                SetProf(newUserProf, sender);
+                GetSet.Set(newUserProf);
                 General.loginUser = LoginTextBox.Text;
                 MessageBox.Show(@"Вы успешно зарегистрированы!");
             }

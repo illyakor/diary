@@ -14,24 +14,9 @@ namespace TRPO
     {
         private static General general;
         public static string loginUser;
-        static Dictionary<string, string> users = new Dictionary<string, string>();
         private General()
         {
             InitializeComponent();
-        }
-        private Dictionary<string, string> GetUser()
-        {
-            try
-            {
-                Client.SendMessageFromSocket(11000, JsonConvert.SerializeObject(users) + "|read");
-                users = JsonConvert.DeserializeObject<Dictionary<string, string>>(Client.msgg);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-                users = new Dictionary<string, string>();
-            }
-            return users;
         }
         public static General GetGeneral()
         {
@@ -55,7 +40,8 @@ namespace TRPO
         }
         private void CheckUser()
         {
-            users = GetUser();
+            Dictionary<string, string> users = new Dictionary<string, string>();
+            users = JsonConvert.DeserializeObject<Dictionary<string, string>>(GetSet.Get(users));
             if (users != null && users.ContainsKey(textBoxLogin.Text) && users[textBoxLogin.Text] == textBoxPassword.Text)
             {
                 OpenMenuForm();

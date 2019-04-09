@@ -11,7 +11,7 @@ namespace TRPO
 {
     class Client
     {
-        public static string msgg;
+        public static string answer;
         public static void SendMessageFromSocket(int port, string message)
         {
             // Буфер для входящих данных
@@ -30,15 +30,15 @@ namespace TRPO
             sender.Connect(ipEndPoint);
 
             Console.WriteLine("Сокет соединяется с {0} ", sender.RemoteEndPoint.ToString());
-            byte[] msg = Encoding.UTF8.GetBytes(message);
+            byte[] byts = Encoding.UTF8.GetBytes(message);
 
             // Отправляем данные через сокет
-            int bytesSent = sender.Send(msg);
+            int bytesSent = sender.Send(byts);
 
             // Получаем ответ от сервера
             int bytesRec = sender.Receive(bytes);
 
-            msgg = Encoding.UTF8.GetString(bytes, 0, bytesRec);
+            answer = Encoding.UTF8.GetString(bytes, 0, bytesRec);
 
             Console.WriteLine("\nОтвет от сервера: new client. \n\n");
 

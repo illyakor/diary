@@ -22,37 +22,12 @@ namespace TRPO
         }
         public void FillGrid()
         {
-            Classes = GetTAC();
+            Classes = JsonConvert.DeserializeObject<Dictionary<string, List<string>>>(GetSet.Get(Classes));
             UserClasses = Classes[General.loginUser];
             for (k = 1; k < 25; k++)
             {
                 dataGridView1.Rows[k - 1].HeaderCell.Value = Schedule.teacher[k];
                 dataGridView1.Rows[k - 1].Cells[0].Value = UserClasses[k - 1];
-            }
-        }
-        private Dictionary<string, List<string>> GetTAC()
-        {
-            try
-            {
-                Client.SendMessageFromSocket(11000, JsonConvert.SerializeObject(Classes) + "|read");
-                Classes = JsonConvert.DeserializeObject<Dictionary<string, List<string>>>(Client.msgg);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-                Classes = new Dictionary<string, List<string>>();
-            }
-            return Classes;
-        }
-        private void SetTAC(Dictionary<string, List<string>> tac, object sender)
-        {
-            try
-            {
-                Client.SendMessageFromSocket(11000, JsonConvert.SerializeObject(tac));
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
             }
         }
         private void ButtonSave_Click(object sender, EventArgs e)
@@ -63,7 +38,7 @@ namespace TRPO
                 UserClasses.Add(dataGridView1.Rows[k].Cells[0].Value.ToString());
             }
             Classes[General.loginUser] = UserClasses;
-            SetTAC(Classes, sender);
+            GetSet.Set(UserClasses);
             MessageBox.Show("Сохранение прошло успешно!(ЭТО ШУТКА)");
         }
     }
